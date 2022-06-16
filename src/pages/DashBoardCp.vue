@@ -1,16 +1,10 @@
 <template>
-  <div class="content-wrapper">
-    <div class="m-4">
-
-      <h3>Dashboard</h3>
-    </div>
-  </div>
+  <div class="container-fluid">
+    <h4 class="page-title">Dashboard</h4>
+  </div> <!-- container -->
 </template>
 
 <script>
-import "../dist/js/pages/dashboard3.js";
-
-// import "../plugins/chart.js/Chart.min.js";
 export default {
   name: "DashBoardCp"
 }
