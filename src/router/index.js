@@ -19,6 +19,7 @@ import DigitalOceanListResourceDropLet from "../pages/digital-ocean/droplets/Dig
 import DigitalOceanCreateDropLet from "../pages/digital-ocean/droplets/DigitalOceanCreateDropLet";
 import DigitalOceanListSshKey from "../pages/digital-ocean/ssh-keys/DigitalOceanListSshKey";
 import DigitalOceanCreateSshKey from '../pages/digital-ocean/ssh-keys/DigitalOceanCreateSshKey'
+import Table from "../pages/Table";
 
 Vue.use(Router)
 
@@ -29,6 +30,12 @@ export default new Router({
       path: '/',
       name: 'dashboard',
       component: DashBoardCp,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/table',
+      name: 'Table',
+      component: Table,
       beforeEnter: ifAuthenticated
     },
     {

@@ -1,9 +1,18 @@
 <template>
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.1.0
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          2015 - UBold theme by <a href="">Coderthemes</a>
+        </div>
+        <div class="col-md-6">
+          <div class="text-md-right footer-links d-none d-sm-block">
+            <a href="javascript:void(0);">About Us</a>
+            <a href="javascript:void(0);">Help</a>
+            <a href="javascript:void(0);">Contact Us</a>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 </template>
