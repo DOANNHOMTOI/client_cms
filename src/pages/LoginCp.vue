@@ -1,77 +1,108 @@
 <template>
-  <div class="login-page">
-    <div class="login-box">
-      <!-- /.login-logo -->
-      <div class="card card-outline card-primary">
-        <div class="card-header text-center">
-          <a href="javascript:void(0)" class="h1"><b>VPS</b> </a>
-        </div>
-        <div class="card-body">
+  <div class="account-pages mt-5 mb-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-pattern">
 
-          <form>
-            <div class="input-group mb-3">
-              <input v-model="email" type="email" class="form-control" placeholder="Email">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
-                </div>
-              </div>
-            </div>
-            <div class="input-group mb-3">
-              <input v-model="password" type="password" class="form-control" placeholder="Password">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
-            </div>
-<!--            <div class="row">-->
-<!--              <div class="col-8">-->
-<!--                <div class="icheck-primary">-->
-<!--                  <input type="checkbox" id="remember">-->
-<!--                  <label for="remember">-->
-<!--                    Remember Me-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-4">-->
-<!--                <button type="submit" class="btn btn-primary btn-block">Sign In</button>-->
-<!--              </div>-->
-<!--            </div>-->
-          </form>
+            <div class="card-body p-4">
 
-          <div class="social-auth-links text-center mt-2 mb-3">
-            <a @click="handleSubmitLogin()" class="btn btn-block btn-primary">
-              Sign In
-            </a>
-<!--            <a href="#" class="btn btn-block btn-danger">-->
-<!--              <i class="fab fa-google-plus mr-2"></i> Sign in using Google+-->
-<!--            </a>-->
+              <div class="text-center w-75 m-auto">
+                <div class="auth-logo">
+                  <a href="" class="logo logo-dark text-center">
+                                            <span class="logo-lg">
+                                                <img src="../assets/images/logo-dark.png" alt="" height="22">
+                                            </span>
+                  </a>
+
+                  <a href="index.html" class="logo logo-light text-center">
+                                            <span class="logo-lg">
+                                                <img src="../assets/images/logo-light.png" alt="" height="22">
+                                            </span>
+                  </a>
+                </div>
+                <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin panel.</p>
+              </div>
+
+              <form action="#">
+
+                <div class="form-group mb-3">
+                  <label for="emailaddress">Email address</label>
+                  <input v-model="email" class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="password">Password</label>
+                  <div class="input-group input-group-merge">
+                    <input v-model="password" type="password" id="password" class="form-control" placeholder="Enter your password">
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked="">
+                    <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0 text-center">
+                  <button class="btn btn-primary btn-block" type="button" @click="handleSubmitLogin()"> Log In</button>
+                </div>
+
+              </form>
+
+              <div class="text-center">
+                <h5 class="mt-3 text-muted">Sign in with</h5>
+                <ul class="social-list list-inline mt-3 mb-0">
+                  <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i
+                      class="mdi mdi-facebook"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i
+                      class="mdi mdi-google"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-info text-info"><i
+                      class="mdi mdi-twitter"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i
+                      class="mdi mdi-github"></i></a>
+                  </li>
+                </ul>
+              </div>
+
+            </div> <!-- end card-body -->
           </div>
-          <!-- /.social-auth-links -->
+          <!-- end card -->
 
-<!--          <p class="mb-1">-->
-<!--            <a href="forgot-password.html">I forgot my password</a>-->
-<!--          </p>-->
-<!--          <p class="mb-0">-->
-<!--            <a href="register.html" class="text-center">Register a new membership</a>-->
-<!--          </p>-->
-        </div>
-        <!-- /.card-body -->
+          <div class="row mt-3">
+            <div class="col-12 text-center">
+              <p><a href="auth-recoverpw.html" class="text-white-50 ml-1">Forgot your password?</a></p>
+              <p class="text-white-50">Don't have an account? <a href="auth-register.html" class="text-white ml-1"><b>Sign
+                Up</b></a></p>
+            </div> <!-- end col -->
+          </div>
+          <!-- end row -->
+
+        </div> <!-- end col -->
       </div>
-      <!-- /.card -->
+      <!-- end row -->
     </div>
+    <!-- end container -->
   </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
+
 export default {
   name: "LoginCp",
-  data(){
-    return{
-      email : '',
-      password : '',
+  data() {
+    return {
+      email: '',
+      password: '',
     }
   },
   methods: {
@@ -82,9 +113,9 @@ export default {
         password: this.password
       }
       this.login(data).then(res => {
-        if (res.status == 200 && res.data.success){
+        if (res.status == 200 && res.data.success) {
           this.$router.push('/');
-        }else{
+        } else {
           alert('Login Failed !')
         }
       })

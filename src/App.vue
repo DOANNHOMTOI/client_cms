@@ -11,7 +11,7 @@
         <FooterCp v-if="!isSimplePage"/>
       </div>
     </div>
-    <div class="right-bar">
+    <div v-if="!isSimplePage" class="right-bar">
       <div data-simplebar class="h-100">
 
         <!-- Nav tabs -->
@@ -423,7 +423,7 @@
 
       </div> <!-- end slimscroll-menu-->
     </div>
-    <div class="rightbar-overlay"></div>
+    <div v-if="!isSimplePage" class="rightbar-overlay"></div>
     <Loading v-bind:class="{ show: this.isLoading }"/>
     <notifications/>
   </div>
