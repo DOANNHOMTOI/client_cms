@@ -19,6 +19,8 @@ import DigitalOceanListResourceDropLet from "../pages/digital-ocean/droplets/Dig
 import DigitalOceanCreateDropLet from "../pages/digital-ocean/droplets/DigitalOceanCreateDropLet";
 import DigitalOceanListSshKey from "../pages/digital-ocean/ssh-keys/DigitalOceanListSshKey";
 import DigitalOceanCreateSshKey from '../pages/digital-ocean/ssh-keys/DigitalOceanCreateSshKey'
+import ProductCategoryList from '../pages/product-category/ProductCategoryList'
+import ProductCategoryAdd from '../pages/product-category/ProductCategoryAdd'
 import Table from "../pages/Table";
 
 Vue.use(Router)
@@ -142,6 +144,17 @@ export default new Router({
       component: DigitalOceanCreateSshKey,
       beforeEnter: ifAuthenticated
     },
-
+    {
+      path: '/product-category/list',
+      name: 'ProductCategoryList',
+      component: ProductCategoryList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/product-category/add',
+      name: 'ProductCategoryAdd',
+      component: ProductCategoryAdd,
+      beforeEnter: ifAuthenticated
+    },
   ]
 })
