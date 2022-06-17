@@ -4,7 +4,7 @@
       <!-- Navbar -->
       <NavbarCp v-if="!isSimplePage"/>
       <AsideCp v-if="!isSimplePage"/>
-      <div class="content-page mt-0" style="padding-top: 80px">
+      <div class="content-page mt-0 mb-5" style="padding-top: 80px">
         <div class="content">
           <router-view></router-view>
         </div>
@@ -463,4 +463,25 @@ export default {
 }
 </script>
 <style>
+body{
+  background-color: white !important;
+}
+.page-title-box .page-title{
+  color: black;
+}
+.card-box{
+  background-color: white;
+}
+.table{
+  color: black;
+}
+.form-control{
+  background-color: white;
+  border: 1px solid rgb(0 0 0 / 10%) ;
+}
+.form-control:focus{
+  background-color: white;
+  border: 1px solid rgb(0 0 0 / 10%) ;
+}
+
 </style>
