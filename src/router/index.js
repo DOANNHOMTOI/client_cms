@@ -33,7 +33,7 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/table',
+      path: '/table/list',
       name: 'Table',
       component: Table,
       beforeEnter: ifAuthenticated
