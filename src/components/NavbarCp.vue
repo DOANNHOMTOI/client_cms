@@ -94,7 +94,7 @@
           <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
             <img src="static/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
             <span class="pro-user-name ml-1">
-                                    Geneva <i class="mdi mdi-chevron-down"></i>
+                                    {{ user.email }} <i class="mdi mdi-chevron-down"></i>
                                 </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -219,7 +219,12 @@
 
 <script>
 export default {
-  name: "NavbarCp"
+  name: "NavbarCp",
+  data(){
+    return{
+      user : JSON.parse(localStorage.getItem('i4sign_in'))
+    }
+  }
 }
 </script>
 
