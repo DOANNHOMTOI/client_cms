@@ -10,22 +10,23 @@ export default {
         password: data.password
       }
 
-      let result = await axiosInstance.post('/login', obj);
+      let result = await axiosInstance.post('/api/login', obj);
       console.log('result', result)
-      // if (result.status == 200 && result.data.success) {
-      //   // commit('SET_USER_INFO', result.data.user);
-      //   commit('SET_TOKEN_LOCAL_STORAGE', {result, obj});
-      //   return result;
-      // } else {
-      //   console.log('Login fail !', result)
-      //   return false;
-      // }
+      if (result.data.success) {
+        // commit('SET_USER_INFO', result.data.user);
+        commit('SET_TOKEN_LOCAL_STORAGE', {result, obj});
+        return result;
+      } else {
+        console.log('Login fail !', result)
+        return false;
+      }
     } catch (error) {
       console.log(error);
       return false;
     }
   },
   async checkLogin({commit, dispatch}) {
+    console.log('check login')
     try {
       let userLocal = localStorage.getItem('i4sign_in');
       let userVps = localStorage.getItem('USER_INFO_VPS');
