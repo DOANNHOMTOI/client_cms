@@ -32,15 +32,86 @@ export default {
       let userVps = localStorage.getItem('USER_INFO_VPS');
       let accessToken = localStorage.getItem('ACCESS_TOKEN');
 
-      let data = {userLocal,userVps,accessToken}
+      let data = {userLocal, userVps, accessToken}
 
-      if(!isEmptyObject(userLocal)) {
+      if (!isEmptyObject(userLocal)) {
         commit('SET_LOGIN_INFO', data);
         return true
       }
       return false;
 
     } catch (error) {
+      return false;
+    }
+  },
+  async getListProductCategory({commit, state}, currPage) {
+    try {
+      commit('SHOW_LOADING', true);
+      console.log('currPage', currPage)
+      return await axiosInstance.get(`/api/product-category?page=${currPage}`).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async createProductCategory({commit, state}, data) {
+    try {
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.post(`/api/product-category`,data).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async updateProductCategory({commit, state}, data) {
+    try {
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.put(`/api/product-category/${data.id}`,data).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async getProductCategory({commit, state}, id) {
+    try {
+      commit('SHOW_LOADING', true);
+      return await axiosInstance.get(`/api/product-category/${id}`).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
       return false;
     }
   },

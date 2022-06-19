@@ -435,7 +435,6 @@ import NavbarCp from "./components/NavbarCp";
 import AsideCp from "./components/AsideCp";
 import FooterCp from "./components/FooterCp";
 import {mapActions, mapState} from "vuex";
-
 export default {
   name: 'App',
   data() {
@@ -483,5 +482,11 @@ body{
   background-color: white;
   border: 1px solid rgb(0 0 0 / 10%) ;
 }
-
+.pagination-rounded .page-link {
+  color: black;
+  border: 1px solid lightgrey;
+}
+.page-link{
+  background-color: white;
+}
 </style>
