@@ -7,7 +7,7 @@
           <div class="page-title-right">
             <router-link to="/product-category/list" class="btn btn-primary waves-effect waves-light">Back</router-link>
           </div>
-          <h4 class="page-title">Create Product Category</h4>
+          <h4 class="page-title">Edit Product Category</h4>
         </div>
       </div>
     </div>
@@ -20,7 +20,14 @@
             <label for="name">Name</label>
             <input v-model="name" type="text" id="name" class="form-control">
           </div>
-          <button type="button" @click="createCategory()" class="btn btn-primary waves-effect waves-light">Submit
+          <div class="form-group mb-3">
+            <label>Active</label>
+            <select v-model="is_active" class="form-control" id="example-select">
+              <option value="1">True</option>
+              <option value="0">False</option>
+            </select>
+          </div>
+          <button type="button" @click="editCategory()" class="btn btn-primary waves-effect waves-light">Submit
           </button>
         </form>
       </div> <!-- end col -->
@@ -33,20 +40,32 @@
 import {mapActions} from "vuex";
 
 export default {
-  name: "ProductCategoryAdd",
+  name: "ProductCategoryEdit",
   data() {
     return {
-      name: ""
+      name: "",
+      is_active: 0
     }
   },
+  created() {
+    this.getProductCategory(this.$route.params.id).then(r => {
+      console.log('getProductCategory', r)
+      this.name = r.data.data.name
+      this.is_active = r.data.data.is_active
+    })
+  },
   methods: {
-    ...mapActions(['createProductCategory']),
-    createCategory() {
-      this.createProductCategory({name: this.name}).then(r => {
-        if (r.data.success){
+    ...mapActions(['getProductCategory', 'updateProductCategory']),
+    editCategory() {
+      this.updateProductCategory({
+        id: parseInt(this.$route.params.id),
+        name: this.name,
+        is_active: parseInt(this.is_active)
+      }).then(r => {
+        if (r.data.success) {
           alert('Success !')
           this.$router.push('/product-category/list')
-        }else{
+        } else {
           alert('Create Fail !')
         }
       }).catch(e => {

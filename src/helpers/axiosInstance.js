@@ -2,10 +2,9 @@ import axios from 'axios';
 import {config} from "../constants/config";
 const axiosInstance = axios.create({
   baseURL: config.url_api_back_end,
-  // timeout: 1000,
   headers: {
     'accept': 'application/json',
-    // 'Authorization' :  'Bearer ' + localStorage.getItem('ACCESS_TOKEN')
+    'Authorization' :  'Bearer ' + localStorage.getItem('ACCESS_TOKEN')
   }
 });
 

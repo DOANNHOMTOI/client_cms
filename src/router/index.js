@@ -22,6 +22,7 @@ import DigitalOceanCreateSshKey from '../pages/digital-ocean/ssh-keys/DigitalOce
 import ProductCategoryList from '../pages/product-category/ProductCategoryList'
 import ProductCategoryAdd from '../pages/product-category/ProductCategoryAdd'
 import Table from "../pages/Table";
+import ProductCategoryEdit from "../pages/product-category/ProductCategoryEdit";
 
 Vue.use(Router)
 
@@ -154,6 +155,12 @@ export default new Router({
       path: '/product-category/add',
       name: 'ProductCategoryAdd',
       component: ProductCategoryAdd,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/product-category/:id',
+      name: 'ProductCategoryEdit',
+      component: ProductCategoryEdit,
       beforeEnter: ifAuthenticated
     },
   ]
