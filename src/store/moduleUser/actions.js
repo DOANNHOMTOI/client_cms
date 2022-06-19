@@ -10,7 +10,7 @@ export default {
         password: data.password
       }
 
-      let result = await axiosInstance.post('/api/login', obj);
+      let result = await axiosInstance.post('/login', obj);
       console.log('result', result)
       // if (result.status == 200 && result.data.success) {
       //   // commit('SET_USER_INFO', result.data.user);
