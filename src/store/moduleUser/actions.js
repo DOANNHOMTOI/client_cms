@@ -46,9 +46,10 @@ export default {
   },
   async getListProductCategory({commit, state}, currPage) {
     try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
       console.log('currPage', currPage)
-      return await axiosInstance.get(`/api/product-category?page=${currPage}`).then(r => {
+      return await axiosInstance.get(`/api/product-category?page=${currPage}`,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
@@ -64,9 +65,10 @@ export default {
   },
   async createProductCategory({commit, state}, data) {
     try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
       console.log('data', data)
-      return await axiosInstance.post(`/api/product-category`,data).then(r => {
+      return await axiosInstance.post(`/api/product-category`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
@@ -82,9 +84,10 @@ export default {
   },
   async updateProductCategory({commit, state}, data) {
     try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
       console.log('data', data)
-      return await axiosInstance.put(`/api/product-category/${data.id}`,data).then(r => {
+      return await axiosInstance.put(`/api/product-category/${data.id}`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
@@ -100,8 +103,9 @@ export default {
   },
   async getProductCategory({commit, state}, id) {
     try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      return await axiosInstance.get(`/api/product-category/${id}`).then(r => {
+      return await axiosInstance.get(`/api/product-category/${id}`,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
