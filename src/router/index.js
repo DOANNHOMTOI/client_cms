@@ -23,6 +23,9 @@ import ProductCategoryList from '../pages/product-category/ProductCategoryList'
 import ProductCategoryAdd from '../pages/product-category/ProductCategoryAdd'
 import Table from "../pages/Table";
 import ProductCategoryEdit from "../pages/product-category/ProductCategoryEdit";
+import ProductList from "../pages/product/ProductList";
+import ProductAdd from "../pages/product/ProductAdd";
+import ProductEdit from "../pages/product/ProductEdit";
 
 Vue.use(Router)
 
@@ -161,6 +164,24 @@ export default new Router({
       path: '/product-category/:id',
       name: 'ProductCategoryEdit',
       component: ProductCategoryEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/product/list',
+      name: 'ProductList',
+      component: ProductList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/product/add',
+      name: 'ProductAdd',
+      component: ProductAdd,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/product/:id',
+      name: 'ProductEdit',
+      component: ProductEdit,
       beforeEnter: ifAuthenticated
     },
   ]
