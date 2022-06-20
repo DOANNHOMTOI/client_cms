@@ -18,6 +18,11 @@ import './assets/css/bootstrap-material-dark.min.css';
 import './assets/css/app-material-dark.min.css';
 import './assets/css/icons.min.css';
 
+import './assets/libs/mohithg-switchery/switchery.min.css';
+import './assets/libs/multiselect/css/multi-select.css';
+import './assets/libs/select2/css/select2.min.css';
+import './assets/libs/bootstrap-select/css/bootstrap-select.min.css';
+import './assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css';
 // import './assets/js/vendor.min.js';
 // import './assets/libs/flatpickr/flatpickr.min.js';
 // import './assets/libs/apexcharts/apexcharts.min.js';

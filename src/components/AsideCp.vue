@@ -98,6 +98,23 @@
               </ul>
             </div>
           </li>
+          <li>
+            <a href="#sidebarProduct" data-toggle="collapse">
+              <i class="mdi mdi-cart-outline"></i>
+              <span> Product </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarProduct">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/product/list">List</router-link>
+                </li>
+                <li>
+                  <router-link to="/product/add">Add</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
         </ul>
 
       </div>

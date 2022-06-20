@@ -5,9 +5,9 @@
       <div class="col-12">
         <div class="page-title-box">
           <div class="page-title-right">
-            <router-link to="/product-category/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
+            <router-link to="/product/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
-          <h4 class="page-title">Product Category</h4>
+          <h4 class="page-title">Product</h4>
         </div>
       </div>
     </div>
@@ -22,7 +22,10 @@
               <thead>
               <tr>
                 <th>#</th>
+                <th>SKU</th>
                 <th>Name</th>
+                <th>Category</th>
+                <th>Price/Sale Price</th>
                 <th>Active</th>
                 <th>Created At</th>
                 <th></th>
@@ -30,8 +33,14 @@
               </thead>
               <tbody>
               <tr v-for="(item,index) in list">
-                <th scope="row">{{ index + 1}}</th>
-                <td>{{ item.name  }}</td>
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ item.sku }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.category.name }}</td>
+                <td>
+                  - Price : <b>{{ convertCurrency(parseInt(item.price)) }}</b> đ <br>
+                  - Sale Price : <b>{{ convertCurrency(parseInt(item.price_sale)) }}</b> đ <br>
+                </td>
                 <td v-if="item.is_active">
                   <button class="btn btn-success waves-effect waves-light">TRUE</button>
                 </td>
@@ -40,7 +49,10 @@
                 </td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
-                  <router-link :to="'/product-category/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
+                  <button class="btn btn-danger waves-effect waves-light">Delete</button>
+                  <router-link :to="'/product/' + item.id" class="btn btn-warning waves-effect waves-light">
+                    Edit
+                  </router-link>
                 </td>
               </tr>
               </tbody>
@@ -51,13 +63,14 @@
       <div class="col-12 m-auto text-center d-flex justify-content-center">
         <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
           <ul class="pagination pagination-rounded">
-            <li v-for="(page,i) in totalPage" :key="i" class="paginate_button page-item" :class="{active : currPage === i + 1}">
+            <li v-for="(page,i) in totalPage" :key="i" class="paginate_button page-item"
+                :class="{active : currPage === i + 1}">
               <a @click="changePage(page)" href="#"
                  aria-controls="datatable-buttons"
                  data-dt-idx="1"
                  tabindex="0"
                  class="page-link">
-                {{ i + 1}}
+                {{ i + 1 }}
               </a>
             </li>
           </ul>
@@ -71,38 +84,42 @@
 <script>
 import {mapActions} from "vuex";
 import moment from "moment";
+
 export default {
-  name: "ProductCategoryList",
-  data(){
+  name: "ProductList",
+  data() {
     return {
-      list:[],
-      currPage : 1,
+      list: [],
+      currPage: 1,
       totalPage: 1
     }
   },
   created() {
-    this.getListProductCategory(this.currPage).then(r=>{
-      console.log('res getProductCategory', r)
+    this.getListProduct(this.currPage).then(r => {
+      console.log('res getListProduct', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
-    }).catch(e=>{
+    }).catch(e => {
       console.log(e)
     })
   },
   methods: {
-    ...mapActions(['getListProductCategory']),
-    changePage(page){
+    ...mapActions(['getListProduct']),
+    changePage(page) {
       this.currPage = page;
 
-      this.getListProductCategory(this.currPage).then(r=>{
+      this.getListProductCategory(this.currPage).then(r => {
         this.list = r.data.data.data
-      }).catch(e=>{
+      }).catch(e => {
         console.log(e)
       })
     },
-    convertMoment(date){
+    convertMoment(date) {
       return moment(date).format("YYYY-MM-DD HH:mm:ss");
+    },
+    convertCurrency(x) {
+      return x.toLocaleString('vi-VN')
     },
   },
 }
