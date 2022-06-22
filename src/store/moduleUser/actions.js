@@ -1,6 +1,39 @@
 import {isEmptyObject} from "../../helpers";
 import {axiosInstance} from "../../helpers/axiosInstance";
 import store from "../index";
+import router from "../../router";
+async function uploadFile(data) {
+  console.log('data', data)
+  let file1 = null
+  let file2 = null
+  let file3 = null
+  const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+  const formData = new FormData()
+  formData.append('file', data.image_id)
+  // eslint-disable-next-line camelcase
+  const image_id = await axiosInstance.post('/api/upload', formData, { headers })
+  if (data.image_1 !== '') {
+    const formData2 = new FormData()
+    formData2.append('file', data.image_1)
+    file1 = await axiosInstance.post('/api/upload', formData2, { headers })
+  }
+  if (data.image_2 !== '') {
+    const formData3 = new FormData()
+    formData3.append('file', data.image_2)
+    file2 = await axiosInstance.post('/api/upload', formData3, { headers })
+  }
+  if (data.image_3 !== '') {
+    const formData4 = new FormData()
+    formData4.append('file', data.image_3)
+    file3 = await axiosInstance.post('/api/upload', formData4, { headers })
+  }
+  return {
+    image_id,
+    file1,
+    file2,
+    file3
+  }
+}
 
 export default {
   async login({commit, state}, data) {
@@ -136,6 +169,47 @@ export default {
     } catch (error) {
       console.log(error);
       return false;
+    }
+  },
+  async createProductAPI({commit, state}, data) {
+    commit('SHOW_LOADING', true)
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      await uploadFile(data).then(async res => {
+        const arrImages = []
+        if (res.file1 != null) arrImages.push(res.file1.data.data)
+        if (res.file2 != null) arrImages.push(res.file2.data.data)
+        if (res.file3 != null) arrImages.push(res.file3.data.data)
+        data.image = res.image_id.data.data
+        data.images = arrImages.join(',')
+        console.log(JSON.stringify(data))
+        await axiosInstance.post('/api/product', data, { headers })
+          // eslint-disable-next-line consistent-return
+          .then(async response => {
+            // If request is good...
+            console.log('response create product', response)
+            await commit('SHOW_LOADING', false)
+            if (response.data.success){
+              alert('create success')
+              await router.push('/product/list');
+            }else{
+              alert(response.data.message)
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            alert('Create Fail !')
+            commit('SHOW_LOADING', false)
+            return false
+          })
+      }).catch(e => {
+        console.log('e', e)
+        alert('Upload File Fail !')
+      })
+    } catch (error) {
+      console.log(error)
+      commit('SHOW_LOADING', false)
+      return false
     }
   },
 }

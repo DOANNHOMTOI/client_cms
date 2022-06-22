@@ -16,6 +16,12 @@
     <div class="row">
       <div class="col-lg-12">
         <form class="row col-12">
+          <div v-if="errors.length">
+            <div class="alert alert-danger">
+              <p v-for="error in errors">- {{ error }}</p> <br>
+            </div>
+          </div>
+
           <div class="form-group mb-3 col-6 ">
             <label>SKU</label>
             <input v-model="sku" type="text" class="form-control">
@@ -60,11 +66,6 @@
               @change="onFileChange( $event)"
             >
           </div>
-
-          <div class="form-group mb-3 col-12">
-            <label>Body</label>
-            <input v-model="body" type="text" class="form-control">
-          </div>
           <div class="form-group mb-3">
             <label>Colors
               <button type="button" class="btn btn-primary ml-2" @click="addColor"><i class="mdi mdi-plus pr-1"></i> ADD</button>
@@ -108,6 +109,10 @@
               </div>
             </div>
           </div>
+          <div class="form-group mb-3 col-12">
+            <label>Content</label>
+            <ckeditor v-model="body" :config="editorConfig"></ckeditor>
+          </div>
           <button type="button" @click="createProduct()" class="btn btn-primary waves-effect waves-light">Submit
           </button>
         </form>
@@ -128,6 +133,7 @@ export default {
   },
   data() {
     return {
+      errors: [],
       name: "",
       qty: 0,
       sku: "",
@@ -147,6 +153,9 @@ export default {
       file1: '',
       file2: '',
       file3: '',
+      editorConfig: {
+        // The configuration of the editor.
+      }
     }
   },
   created() {
@@ -157,7 +166,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['createProductCategory', 'getListProductCategory']),
+    ...mapActions(['createProductAPI', 'getListProductCategory']),
     onFileChange(event) {
       this.file = event.target.files[0]
     },
@@ -171,16 +180,79 @@ export default {
       this.file3 = event.target.files[0]
     },
     createProduct() {
-      this.createProductCategory({name: this.name}).then(r => {
-        if (r.data.success) {
-          alert('Success !')
-          this.$router.push('/product-category/list')
-        } else {
-          alert('Create Fail !')
-        }
+      this.errors = []
+      if (!this.checkForm()) return false;
+
+      let arrSize = []
+      this.sizes.map(item => {
+        arrSize.push(item.value)
+      })
+
+      let arrColor = []
+      this.colors.map(item => {
+        arrColor.push(item.value)
+      })
+      let obj = {
+        name: this.name,
+        qty: parseInt(this.qty),
+        sku: this.sku,
+        excerpt: this.excerpt,
+        description: this.description,
+        body: this.body,
+        category_id: this.category_id,
+        colors: arrColor.join(','),
+        sizes: arrSize.join(','),
+        is_active: 1,
+        price: parseInt(this.price),
+        price_sale: parseInt(this.price_sale),
+        image_id: this.file,
+        image_1: this.file1,
+        image_2: this.file2,
+        image_3: this.file3,
+      }
+      this.createProductAPI(obj).then(r => {
+        console.log('r createProductAPI', r)
+        // if (r.data.success) {
+        //   alert('Success !')
+        //   this.$router.push('/product-category/list')
+        // } else {
+        //   alert('Create Fail !')
+        //
       }).catch(e => {
         console.log('e', e)
       })
+    },
+    checkForm(){
+      let flag = true;
+      if (!this.name) {
+        this.errors.push('name is required !');
+        flag = false;
+      }
+      if (!this.sku) {
+        this.errors.push('sku is required !');
+        flag = false;
+      }
+      if (!this.price) {
+        this.errors.push('price is required !');
+        flag = false;
+      }
+      if (!this.file) {
+        this.errors.push('image is required !');
+        flag = false;
+      }
+      if (this.sizes.length === 0) {
+        this.errors.push('sizes is required !');
+        flag = false;
+      }
+      if (this.colors.length === 0) {
+        this.errors.push('colors is required !');
+        flag = false;
+      }
+      if (!this.category_id) {
+        this.errors.push('category is required !');
+        flag = false;
+      }
+      return flag;
     },
     addSize() {
       this.sizes.push({value: ''});
