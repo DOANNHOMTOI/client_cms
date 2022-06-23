@@ -185,12 +185,16 @@ export default {
 
       let arrSize = []
       this.sizes.map(item => {
-        arrSize.push(item.value)
+        if (item.value !== ''){
+          arrSize.push(item.value)
+        }
       })
 
       let arrColor = []
       this.colors.map(item => {
-        arrColor.push(item.value)
+        if (item.value !== ''){
+          arrColor.push(item.value)
+        }
       })
       let obj = {
         name: this.name,
