@@ -115,6 +115,23 @@
               </ul>
             </div>
           </li>
+          <li>
+            <a href="#sidebarVoucher" data-toggle="collapse">
+              <i class="mdi mdi-cart-outline"></i>
+              <span>Voucher </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarVoucher">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/voucher/list">List</router-link>
+                </li>
+                <li>
+                  <router-link to="/voucher/add">Add</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
         </ul>
 
       </div>
