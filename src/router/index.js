@@ -26,6 +26,9 @@ import ProductCategoryEdit from "../pages/product-category/ProductCategoryEdit";
 import ProductList from "../pages/product/ProductList";
 import ProductAdd from "../pages/product/ProductAdd";
 import ProductEdit from "../pages/product/ProductEdit";
+import VoucherList from "../pages/voucher/VoucherList";
+import VoucherAdd from "../pages/voucher/VoucherAdd";
+import VoucherEdit from "../pages/voucher/VoucherEdit";
 
 Vue.use(Router)
 
@@ -182,6 +185,24 @@ export default new Router({
       path: '/product/:id',
       name: 'ProductEdit',
       component: ProductEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/voucher/list',
+      name: 'VoucherList',
+      component: VoucherList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/voucher/add',
+      name: 'VoucherAdd',
+      component: VoucherAdd,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/voucher/:id',
+      name: 'VoucherEdit',
+      component: VoucherEdit,
       beforeEnter: ifAuthenticated
     },
   ]
