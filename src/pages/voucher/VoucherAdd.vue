@@ -33,6 +33,14 @@
             <label>Percent (%)</label>
             <input v-model="percent_value" type="number" class="form-control">
           </div>
+          <div class="form-group mb-3">
+            <label>Start Time</label>
+            <input v-model="startTime" type="date" class="form-control">
+          </div>
+          <div class="form-group mb-3">
+            <label>End Time</label>
+            <input v-model="endTime" type="date" class="form-control">
+          </div>
           <button type="button" @click="createVoucher()" class="btn btn-primary waves-effect waves-light">Submit
           </button>
         </form>
@@ -52,6 +60,8 @@ export default {
       code: "",
       title: "",
       percent_value: "",
+      startTime: "",
+      endTime: "",
       errors: [],
     }
   },
@@ -61,7 +71,8 @@ export default {
       this.errors = []
       if (!this.checkForm()) return false;
 
-      this.createVoucherAPI({code: this.code,title: this.title,percent_value: this.percent_value}).then(r => {
+      console.log(new Date(this.startTime).getTime())
+      this.createVoucherAPI({code: this.code,title: this.title,percent_value: this.percent_value,start_time: new Date(this.startTime).getTime(),end_time: new Date(this.endTime).getTime()}).then(r => {
         if (r.data.success){
           alert('Success !')
           this.$router.push('/voucher/list')
@@ -84,6 +95,14 @@ export default {
       }
       if (!this.percent_value) {
         this.errors.push('percent_value is required !');
+        flag = false;
+      }
+      if (!this.startTime) {
+        this.errors.push('startTime is required !');
+        flag = false;
+      }
+      if (!this.endTime) {
+        this.errors.push('endTime is required !');
         flag = false;
       }
       return flag;

@@ -25,6 +25,8 @@
                 <th>Code</th>
                 <th>Title</th>
                 <th>Percent (%)</th>
+                <th>Start Time</th>
+                <th>End Time</th>
                 <th>Active</th>
                 <th>Created At</th>
                 <th></th>
@@ -42,6 +44,8 @@
                 <td v-if="!item.is_active">
                   <button class="btn btn-danger waves-effect waves-light">FALSE</button>
                 </td>
+                <td>{{ timeBW(item.start_time)  }}</td>
+                <td>{{ timeBW(item.end_time)  }}</td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
                   <router-link :to="'/voucher/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
@@ -104,6 +108,22 @@ export default {
       }).catch(e=>{
         console.log(e)
       })
+    },
+    timeBW(timestamp){
+      console.log('item.start_time', timestamp)
+      var date = new Date(parseInt(timestamp));
+
+      console.log('DATE,', date)
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      // return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+      if(month < 10) month = '0' + month
+      if(day < 10) day = '0' + day
+      return year + "-" + month + "-" + day
     },
     convertMoment(date){
       return moment(date).format("YYYY-MM-DD HH:mm:ss");

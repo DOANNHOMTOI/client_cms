@@ -34,6 +34,14 @@
             <input v-model="percent_value" type="number" class="form-control">
           </div>
           <div class="form-group mb-3">
+            <label>Start Time</label>
+            <input v-model="startTime" type="date" class="form-control">
+          </div>
+          <div class="form-group mb-3">
+            <label>End Time</label>
+            <input v-model="endTime" type="date" class="form-control">
+          </div>
+          <div class="form-group mb-3">
             <label>Active</label>
             <select v-model="is_active" class="form-control" id="example-select">
               <option value="1">True</option>
@@ -60,6 +68,8 @@ export default {
       title: "",
       percent_value: "",
       errors: [],
+      startTime: "",
+      endTime: "",
       is_active: 0
     }
   },
@@ -69,17 +79,37 @@ export default {
       this.code = r.data.data.code
       this.title = r.data.data.title
       this.percent_value = r.data.data.percent_value
+      this.startTime = this.timeBW(r.data.data.start_time)
+      this.endTime = this.timeBW(r.data.data.end_time)
       this.is_active = r.data.data.is_active
     })
   },
   methods: {
     ...mapActions(['getVoucherDetail', 'updateVoucher']),
+    timeBW(timestamp){
+      console.log('item.start_time', timestamp)
+      var date = new Date(parseInt(timestamp));
+
+      console.log('DATE,', date)
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      // return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+      if(month < 10) month = '0' + month
+      if(day < 10) day = '0' + day
+      return year + "-" + month + "-" + day
+    },
     editCategory() {
       this.updateVoucher({
         id: parseInt(this.$route.params.id),
         title: this.title,
         percent_value: this.percent_value,
-        is_active: parseInt(this.is_active)
+        is_active: parseInt(this.is_active),
+        start_time: new Date(this.startTime).getTime(),
+        end_time: new Date(this.endTime).getTime()
       }).then(r => {
         if (r.data.success) {
           alert('Success !')

@@ -74,17 +74,11 @@
 
           <li class="menu-title mt-2">Apps</li>
 
-          <li>
-            <a href="apps-chat.html">
-              <i class="mdi mdi-forum-outline"></i>
-              <span> Chat </span>
-            </a>
-          </li>
 
           <li>
             <a href="#sidebarEcommerce" data-toggle="collapse">
               <i class="mdi mdi-cart-outline"></i>
-              <span> Product Category </span>
+              <span>  Category </span>
               <span class="menu-arrow"></span>
             </a>
             <div class="collapse" id="sidebarEcommerce">
