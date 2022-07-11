@@ -14,6 +14,9 @@ import ProductEdit from "../pages/product/ProductEdit";
 import VoucherList from "../pages/voucher/VoucherList";
 import VoucherAdd from "../pages/voucher/VoucherAdd";
 import VoucherEdit from "../pages/voucher/VoucherEdit";
+import Customer from "../pages/customer/CustomerList";
+import OrderList from "../pages/order/OrderList";
+import OrderDetail from "../pages/order/OrderDetail";
 
 Vue.use(Router)
 
@@ -90,6 +93,24 @@ export default new Router({
       path: '/voucher/:id',
       name: 'VoucherEdit',
       component: VoucherEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/customer',
+      name: 'Customer',
+      component: Customer,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/order/list',
+      name: 'OrderList',
+      component: OrderList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/order/:id',
+      name: 'OrderDetail',
+      component: OrderDetail,
       beforeEnter: ifAuthenticated
     },
   ]

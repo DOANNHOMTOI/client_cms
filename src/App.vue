@@ -489,4 +489,7 @@ body{
 .page-link{
   background-color: white;
 }
+body {
+  color: black;
+}
 </style>

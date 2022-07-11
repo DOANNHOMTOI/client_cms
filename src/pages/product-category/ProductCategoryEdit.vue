@@ -7,7 +7,7 @@
           <div class="page-title-right">
             <router-link to="/product-category/list" class="btn btn-primary waves-effect waves-light">Back</router-link>
           </div>
-          <h4 class="page-title">Edit Product Category</h4>
+          <h4 class="page-title">Edit Category</h4>
         </div>
       </div>
     </div>
