@@ -5,9 +5,8 @@
       <div class="col-12">
         <div class="page-title-box">
           <div class="page-title-right">
-            <router-link to="/product-category/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
-          <h4 class="page-title"> Category</h4>
+          <h4 class="page-title"> Orders</h4>
         </div>
       </div>
     </div>
@@ -22,25 +21,35 @@
               <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Active</th>
-                <th>Created At</th>
+                <th>SKU</th>
+                <th>Total Price</th>
+
+                <th>Status</th>
+                <th>Date Order</th>
                 <th></th>
               </tr>
               </thead>
               <tbody>
               <tr v-for="(item,index) in list">
                 <th scope="row">{{ index + 1}}</th>
-                <td>{{ item.name  }}</td>
-                <td v-if="item.is_active">
-                  <button class="btn btn-success waves-effect waves-light">TRUE</button>
+                <td>{{ item.sku  }}</td>
+                <td>{{ convertCurrency(item.total_price)  }}</td>
+                <td v-if="item.status == 1">
+                  <button class="btn btn-primary waves-effect waves-light">NEW</button>
                 </td>
-                <td v-if="!item.is_active">
-                  <button class="btn btn-danger waves-effect waves-light">FALSE</button>
+                <td v-if="item.status == 2">
+                  <button class="btn btn-info waves-effect waves-light">PROCESSING</button>
+                </td>
+
+                <td v-if="item.status == 3">
+                  <button class="btn btn-success waves-effect waves-light">SUCCESS</button>
+                </td>
+                <td v-if="item.status == 4">
+                  <button class="btn btn-danger waves-effect waves-light">CANCEL</button>
                 </td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
-                  <router-link :to="'/product-category/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
+                  <router-link :to="'/order/' + item.id" class="btn btn-warning waves-effect waves-light">VIEW</router-link>
                 </td>
               </tr>
               </tbody>
@@ -72,7 +81,7 @@
 import {mapActions} from "vuex";
 import moment from "moment";
 export default {
-  name: "ProductCategoryList",
+  name: "OrderList",
   data(){
     return {
       list:[],
@@ -81,8 +90,8 @@ export default {
     }
   },
   created() {
-    this.getListProductCategory(this.currPage).then(r=>{
-      console.log('res getProductCategory', r)
+    this.getListOrder(this.currPage).then(r=>{
+      console.log('res getListOrder', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
@@ -91,11 +100,14 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getListProductCategory']),
+    ...mapActions(['getListOrder']),
+    convertCurrency(x){
+      return x.toLocaleString('vi-VN') + ' đ'
+    },
     changePage(page){
       this.currPage = page;
 
-      this.getListProductCategory(this.currPage).then(r=>{
+      this.getListOrder(this.currPage).then(r=>{
         this.list = r.data.data.data
       }).catch(e=>{
         console.log(e)

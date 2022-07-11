@@ -54,22 +54,6 @@
               <span class="badge badge-success badge-pill float-right">4</span>
               <span> Dashboards </span>
             </a>
-            <div class="collapse" id="sidebarDashboards">
-              <ul class="nav-second-level">
-                <li>
-                  <a href="index.html">Dashboard 1</a>
-                </li>
-                <li>
-                  <a href="dashboard-2.html">Dashboard 2</a>
-                </li>
-                <li>
-                  <a href="dashboard-3.html">Dashboard 3</a>
-                </li>
-                <li>
-                  <a href="dashboard-4.html">Dashboard 4</a>
-                </li>
-              </ul>
-            </div>
           </li>
 
           <li class="menu-title mt-2">Apps</li>
@@ -122,6 +106,34 @@
                 </li>
                 <li>
                   <router-link to="/voucher/add">Add</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#sidebarCustomer" data-toggle="collapse">
+              <i class="mdi mdi-cart-outline"></i>
+              <span>Customer </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarCustomer">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/customer">List</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#sidebarOrder" data-toggle="collapse">
+              <i class="mdi mdi-cart-outline"></i>
+              <span>Order </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarOrder">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/order/list">List</router-link>
                 </li>
               </ul>
             </div>
