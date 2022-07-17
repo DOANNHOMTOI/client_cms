@@ -5,9 +5,9 @@
       <div class="col-12">
         <div class="page-title-box">
           <div class="page-title-right">
-            <router-link to="/product-category/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
+<!--            <router-link to="/voucher/add" class="btn btn-blue waves-effect waves-light">Create</router-link>-->
           </div>
-          <h4 class="page-title"> Category</h4>
+          <h4 class="page-title">Guest</h4>
         </div>
       </div>
     </div>
@@ -23,8 +23,10 @@
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Position</th>
-                <th>Active</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Status</th>
                 <th>Created At</th>
                 <th></th>
               </tr>
@@ -33,16 +35,18 @@
               <tr v-for="(item,index) in list">
                 <th scope="row">{{ index + 1}}</th>
                 <td>{{ item.name  }}</td>
-                <td>{{ item.position  }}</td>
-                <td v-if="item.is_active">
+                <td>{{ item.phone  }}</td>
+                <td>{{ item.email  }}</td>
+                <td>{{ item.address  }}</td>
+                <td v-if="item.status">
                   <button class="btn btn-success waves-effect waves-light">TRUE</button>
                 </td>
-                <td v-if="!item.is_active">
+                <td v-if="!item.status">
                   <button class="btn btn-danger waves-effect waves-light">FALSE</button>
                 </td>
-                <td>{{ convertMoment(item.created_at) }}</td>
+                <td>{{ convertMoment(item.created_at)  }}</td>
                 <td>
-                  <router-link :to="'/product-category/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
+<!--                  <router-link :to="'/voucher/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>-->
                 </td>
               </tr>
               </tbody>
@@ -74,7 +78,7 @@
 import {mapActions} from "vuex";
 import moment from "moment";
 export default {
-  name: "ProductCategoryList",
+  name: "GuestList",
   data(){
     return {
       list:[],
@@ -83,8 +87,8 @@ export default {
     }
   },
   created() {
-    this.getListProductCategory(this.currPage).then(r=>{
-      console.log('res getProductCategory', r)
+    this.getListGuest(this.currPage).then(r=>{
+      console.log('res getListGuest', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
@@ -93,15 +97,31 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getListProductCategory']),
+    ...mapActions(['getListGuest']),
     changePage(page){
       this.currPage = page;
 
-      this.getListProductCategory(this.currPage).then(r=>{
+      this.getListGuest(this.currPage).then(r=>{
         this.list = r.data.data.data
       }).catch(e=>{
         console.log(e)
       })
+    },
+    timeBW(timestamp){
+      console.log('item.start_time', timestamp)
+      var date = new Date(parseInt(timestamp));
+
+      console.log('DATE,', date)
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      // return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+      if(month < 10) month = '0' + month
+      if(day < 10) day = '0' + day
+      return year + "-" + month + "-" + day
     },
     convertMoment(date){
       return moment(date).format("YYYY-MM-DD HH:mm:ss");

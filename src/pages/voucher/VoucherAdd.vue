@@ -23,7 +23,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="code">Code</label>
-            <input v-model="code" type="text" id="code" class="form-control" min="6" max="6">
+            <input style="background-color: lightgray" disabled readonly v-model="code" type="text" id="code" class="form-control" min="6" max="6">
           </div>
           <div class="form-group mb-3">
             <label>Title</label>
@@ -57,7 +57,7 @@ export default {
   name: "VoucherAdd",
   data() {
     return {
-      code: "",
+      code: this.makeid(6),
       title: "",
       percent_value: "",
       startTime: "",
@@ -65,8 +65,21 @@ export default {
       errors: [],
     }
   },
+  computed:{
+
+  },
   methods: {
     ...mapActions(['createVoucherAPI']),
+    makeid(length) {
+      var result           = '';
+      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() *
+          charactersLength));
+      }
+      return result;
+    },
     createVoucher() {
       this.errors = []
       if (!this.checkForm()) return false;

@@ -15,8 +15,10 @@ import VoucherList from "../pages/voucher/VoucherList";
 import VoucherAdd from "../pages/voucher/VoucherAdd";
 import VoucherEdit from "../pages/voucher/VoucherEdit";
 import Customer from "../pages/customer/CustomerList";
+import Guest from "../pages/guest/GuestList";
 import OrderList from "../pages/order/OrderList";
 import OrderDetail from "../pages/order/OrderDetail";
+import RatingList from "../pages/rating/RatingList";
 
 Vue.use(Router)
 
@@ -99,6 +101,18 @@ export default new Router({
       path: '/customer',
       name: 'Customer',
       component: Customer,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/guest',
+      name: 'Guest',
+      component: Guest,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/rating',
+      name: 'RatingList',
+      component: RatingList,
       beforeEnter: ifAuthenticated
     },
     {

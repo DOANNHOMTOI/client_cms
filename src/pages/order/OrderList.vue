@@ -11,7 +11,17 @@
       </div>
     </div>
     <!-- end page title -->
-
+    <div class="row">
+      <div data-v-482562f6="" class="form-group mb-3 col-2 ">
+        <input v-model="sku" data-v-482562f6="" type="text" placeholder="Mã đơn hàng" class="form-control">
+      </div>
+      <div data-v-482562f6="" class="form-group mb-3 col-3">
+        <input v-model="phone" style="" data-v-482562f6="" type="text" placeholder="Số điện thoại" class="form-control">
+      </div>
+      <div data-v-482562f6="" class="form-group mb-3 col-2">
+        <button @click="searchOrder()" class="btn btn-blue waves-effect waves-light">Search</button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <div class="card-box">
@@ -86,11 +96,13 @@ export default {
     return {
       list:[],
       currPage : 1,
-      totalPage: 1
+      totalPage: 1,
+      sku:"",
+      phone: ""
     }
   },
   created() {
-    this.getListOrder(this.currPage).then(r=>{
+    this.getListOrder({currPage: this.currPage}).then(r=>{
       console.log('res getListOrder', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
@@ -104,10 +116,20 @@ export default {
     convertCurrency(x){
       return x.toLocaleString('vi-VN') + ' đ'
     },
+    searchOrder() {
+      this.getListOrder({currPage: this.currPage, sku: this.sku, phone: this.phone}).then(r => {
+        console.log('res getListOrder filter', r)
+        this.list = r.data.data.data
+        this.currPage = r.data.data.current_page
+        this.totalPage = r.data.data.last_page
+      }).catch(e => {
+        console.log(e)
+      })
+    },
     changePage(page){
       this.currPage = page;
 
-      this.getListOrder(this.currPage).then(r=>{
+      this.getListOrder({currPage: this.currPage}).then(r=>{
         this.list = r.data.data.data
       }).catch(e=>{
         console.log(e)

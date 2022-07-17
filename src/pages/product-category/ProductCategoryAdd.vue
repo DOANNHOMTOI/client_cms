@@ -20,6 +20,10 @@
             <label for="name">Name</label>
             <input v-model="name" type="text" id="name" class="form-control">
           </div>
+          <div class="form-group mb-3">
+            <label for="name">Position</label>
+            <input v-model="position" type="number" class="form-control">
+          </div>
           <button type="button" @click="createCategory()" class="btn btn-primary waves-effect waves-light">Submit
           </button>
         </form>
@@ -36,13 +40,14 @@ export default {
   name: "ProductCategoryAdd",
   data() {
     return {
-      name: ""
+      name: "",
+      position: 0
     }
   },
   methods: {
     ...mapActions(['createProductCategory']),
     createCategory() {
-      this.createProductCategory({name: this.name}).then(r => {
+      this.createProductCategory({name: this.name,position: this.position}).then(r => {
         if (r.data.success){
           alert('Success !')
           this.$router.push('/product-category/list')
