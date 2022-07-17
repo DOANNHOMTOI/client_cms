@@ -12,7 +12,17 @@
       </div>
     </div>
     <!-- end page title -->
-
+    <div class="row">
+      <div data-v-482562f6="" class="form-group mb-3 col-2 ">
+        <input v-model="sku" data-v-482562f6="" type="text" placeholder="Mã sản phẩm" class="form-control">
+      </div>
+      <div data-v-482562f6="" class="form-group mb-3 col-3">
+        <input v-model="name" style="" data-v-482562f6="" type="text" placeholder="Tên sản phẩm" class="form-control">
+      </div>
+      <div data-v-482562f6="" class="form-group mb-3 col-2">
+        <button @click="searchProduct()" class="btn btn-blue waves-effect waves-light">Search</button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <div class="card-box">
@@ -90,12 +100,14 @@ export default {
   data() {
     return {
       list: [],
+      sku: "",
+      name: "",
       currPage: 1,
       totalPage: 1
     }
   },
   created() {
-    this.getListProduct(this.currPage).then(r => {
+    this.getListProduct({currPage:this.currPage}).then(r => {
       console.log('res getListProduct', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
@@ -106,10 +118,19 @@ export default {
   },
   methods: {
     ...mapActions(['getListProduct']),
+    searchProduct(){
+      this.getListProduct({currPage:this.currPage,sku: this.sku,name: this.name}).then(r => {
+        console.log('res getListProduct filter', r)
+        this.list = r.data.data.data
+        this.currPage = r.data.data.current_page
+        this.totalPage = r.data.data.last_page
+      }).catch(e => {
+        console.log(e)
+      })
+    },
     changePage(page) {
       this.currPage = page;
-
-      this.getListProductCategory(this.currPage).then(r => {
+      this.getListProduct({currPage: this.currPage}).then(r => {
         this.list = r.data.data.data
       }).catch(e => {
         console.log(e)

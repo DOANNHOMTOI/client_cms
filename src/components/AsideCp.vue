@@ -61,7 +61,7 @@
 
           <li>
             <a href="#sidebarEcommerce" data-toggle="collapse">
-              <i class="mdi mdi-cart-outline"></i>
+              <i class="mdi mdi-text-box-multiple-outline"></i>
               <span>  Category </span>
               <span class="menu-arrow"></span>
             </a>
@@ -78,7 +78,7 @@
           </li>
           <li>
             <a href="#sidebarProduct" data-toggle="collapse">
-              <i class="mdi mdi-cart-outline"></i>
+              <i class="mdi mdi-layers-outline"></i>
               <span> Product </span>
               <span class="menu-arrow"></span>
             </a>
@@ -95,7 +95,7 @@
           </li>
           <li>
             <a href="#sidebarVoucher" data-toggle="collapse">
-              <i class="mdi mdi-cart-outline"></i>
+              <i class="mdi mdi-gift-outline"></i>
               <span>Voucher </span>
               <span class="menu-arrow"></span>
             </a>
@@ -112,7 +112,7 @@
           </li>
           <li>
             <a href="#sidebarCustomer" data-toggle="collapse">
-              <i class="mdi mdi-cart-outline"></i>
+              <i class="mdi mdi-account-multiple-outline"></i>
               <span>Customer </span>
               <span class="menu-arrow"></span>
             </a>
@@ -134,6 +134,34 @@
               <ul class="nav-second-level">
                 <li>
                   <router-link to="/order/list">List</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#sidebarGuest" data-toggle="collapse">
+              <i class="mdi mdi-account-circle-outline"></i>
+              <span>Guest </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarGuest">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/guest">List</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#sidebarRate" data-toggle="collapse">
+              <i class="mdi mdi-lifebuoy"></i>
+              <span>Rating </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarRate">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/rating">List</router-link>
                 </li>
               </ul>
             </div>

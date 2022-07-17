@@ -21,6 +21,10 @@
             <input v-model="name" type="text" id="name" class="form-control">
           </div>
           <div class="form-group mb-3">
+            <label for="name">Position</label>
+            <input v-model="position" type="number" class="form-control">
+          </div>
+          <div class="form-group mb-3">
             <label>Active</label>
             <select v-model="is_active" class="form-control" id="example-select">
               <option value="1">True</option>
@@ -44,6 +48,7 @@ export default {
   data() {
     return {
       name: "",
+      position: 0,
       is_active: 0
     }
   },
@@ -51,6 +56,7 @@ export default {
     this.getProductCategory(this.$route.params.id).then(r => {
       console.log('getProductCategory', r)
       this.name = r.data.data.name
+      this.position = r.data.data.position
       this.is_active = r.data.data.is_active
     })
   },
@@ -60,6 +66,7 @@ export default {
       this.updateProductCategory({
         id: parseInt(this.$route.params.id),
         name: this.name,
+        position: this.position,
         is_active: parseInt(this.is_active)
       }).then(r => {
         if (r.data.success) {

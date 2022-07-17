@@ -102,12 +102,20 @@ export default {
       return false;
     }
   },
-  async getListOrder({commit, state}, currPage) {
+  async getListOrder({commit, state}, data) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
-      commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
-      return await axiosInstance.get(`/api/order?page=${currPage}`,{headers : headers}).then(r => {
+      let endPoint = `/api/order?page=${data.currPage}`;
+      commit('SHOW_LOADING', true)
+
+      if (data.sku !== '' && data.sku !== undefined){
+        endPoint += `&sku=${data.sku}`
+      }
+      if (data.phone !== '' && data.phone !== undefined){
+        endPoint += `&phone=${data.phone}`
+      }
+
+      return await axiosInstance.get(endPoint,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
@@ -214,12 +222,21 @@ export default {
       return false;
     }
   },
-  async getListProduct({commit, state}, currPage) {
+  async getListProduct({commit, state}, data) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
-      commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
-      return await axiosInstance.get(`/api/product?page=${currPage}`,{headers : headers}).then(r => {
+      let endPoint = `/api/product?page=${data.currPage}`;
+      commit('SHOW_LOADING', true)
+      console.log('currPage', data.currPage)
+
+      if (data.sku !== '' && data.sku !== undefined){
+        endPoint += `&sku=${data.sku}`
+      }
+      if (data.name !== '' && data.name !== undefined){
+        endPoint += `&name=${data.name}`
+      }
+
+      return await axiosInstance.get(endPoint,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
@@ -374,6 +391,44 @@ export default {
       return false;
     }
   },
+  async getListGuest({commit, state}, currPage) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('currPage', currPage)
+      return await axiosInstance.get(`/api/guest?page=${currPage}`,{headers : headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async getListRating({commit, state}, currPage) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('currPage', currPage)
+      return await axiosInstance.get(`/api/rating?page=${currPage}`,{headers : headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
   async createVoucherAPI({commit, state}, data) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
@@ -417,6 +472,25 @@ export default {
       commit('SHOW_LOADING', true);
       console.log('data', data)
       return await axiosInstance.put(`/api/voucher/${data.id}`,data,{headers: headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async updateRating({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.put(`/api/rating/${data.id}`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
