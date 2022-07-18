@@ -49,11 +49,9 @@
           <li class="menu-title">Navigation</li>
 
           <li>
-            <a href="#sidebarDashboards" data-toggle="collapse">
-              <i class="mdi mdi-view-dashboard-outline"></i>
-              <span class="badge badge-success badge-pill float-right">4</span>
-              <span> Dashboards </span>
-            </a>
+            <router-link to="/">
+              <span> Dashboards</span>
+            </router-link>
           </li>
 
           <li class="menu-title mt-2">Apps</li>
