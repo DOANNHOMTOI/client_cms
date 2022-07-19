@@ -19,6 +19,9 @@ import Guest from "../pages/guest/GuestList";
 import OrderList from "../pages/order/OrderList";
 import OrderDetail from "../pages/order/OrderDetail";
 import RatingList from "../pages/rating/RatingList";
+import BannerList from "../pages/banner/BannerList";
+import BannerAdd from "../pages/banner/BannerAdd";
+import BannerEdit from "../pages/banner/BannerEdit";
 
 Vue.use(Router)
 
@@ -95,6 +98,24 @@ export default new Router({
       path: '/voucher/:id',
       name: 'VoucherEdit',
       component: VoucherEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/banner',
+      name: 'BannerList',
+      component: BannerList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/banner/add',
+      name: 'BannerAdd',
+      component: BannerAdd,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/banner/:id',
+      name: 'BannerEdit',
+      component: BannerEdit,
       beforeEnter: ifAuthenticated
     },
     {

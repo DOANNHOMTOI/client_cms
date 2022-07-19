@@ -5,24 +5,13 @@
       <div class="col-12">
         <div class="page-title-box">
           <div class="page-title-right">
-            <router-link to="/product/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
+            <router-link to="/banner/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
-          <h4 class="page-title">Product</h4>
+          <h4 class="page-title">Banner</h4>
         </div>
       </div>
     </div>
     <!-- end page title -->
-    <div class="row">
-      <div data-v-482562f6="" class="form-group mb-3 col-2 ">
-        <input v-model="sku" data-v-482562f6="" type="text" placeholder="Mã sản phẩm" class="form-control">
-      </div>
-      <div data-v-482562f6="" class="form-group mb-3 col-3">
-        <input v-model="name" style="" data-v-482562f6="" type="text" placeholder="Tên sản phẩm" class="form-control">
-      </div>
-      <div data-v-482562f6="" class="form-group mb-3 col-2">
-        <button @click="searchProduct()" class="btn btn-blue waves-effect waves-light">Search</button>
-      </div>
-    </div>
     <div class="row">
       <div class="col-12">
         <div class="card-box">
@@ -32,11 +21,9 @@
               <thead>
               <tr>
                 <th>#</th>
-                <th>SKU</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price/Sale Price</th>
-                <th>Active</th>
+                <th>Title</th>
+                <th>Path File</th>
+                <th>Status</th>
                 <th>Created At</th>
                 <th></th>
               </tr>
@@ -44,13 +31,8 @@
               <tbody>
               <tr v-for="(item,index) in list">
                 <th scope="row">{{ index + 1 }}</th>
-                <td>{{ item.sku }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.category.name }}</td>
-                <td>
-                  - Price : <b>{{ convertCurrency(parseInt(item.price)) }}</b> đ <br>
-                  - Sale Price : <b>{{ convertCurrency(parseInt(item.price_sale)) }}</b> đ <br>
-                </td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.image }}</td>
                 <td v-if="item.is_active">
                   <button class="btn btn-success waves-effect waves-light">TRUE</button>
                 </td>
@@ -59,8 +41,7 @@
                 </td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
-<!--                  <button class="btn btn-danger waves-effect waves-light">Delete</button>-->
-                  <router-link :to="'/product/' + item.id" class="btn btn-warning waves-effect waves-light">
+                  <router-link :to="'/banner/' + item.id" class="btn btn-warning waves-effect waves-light">
                     Edit
                   </router-link>
                 </td>
@@ -96,7 +77,7 @@ import {mapActions} from "vuex";
 import moment from "moment";
 
 export default {
-  name: "ProductList",
+  name: "BannerList",
   data() {
     return {
       list: [],
@@ -107,8 +88,8 @@ export default {
     }
   },
   created() {
-    this.getListProduct({currPage:this.currPage}).then(r => {
-      console.log('res getListProduct', r)
+    this.getListBanner({currPage:this.currPage}).then(r => {
+      console.log('res getListBanner', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
@@ -117,10 +98,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getListProduct']),
+    ...mapActions(['getListBanner']),
     searchProduct(){
-      this.getListProduct({currPage:this.currPage,sku: this.sku,name: this.name}).then(r => {
-        console.log('res getListProduct filter', r)
+      this.getListBanner({currPage:this.currPage,sku: this.sku,name: this.name}).then(r => {
+        console.log('res getListBanner filter', r)
         this.list = r.data.data.data
         this.currPage = r.data.data.current_page
         this.totalPage = r.data.data.last_page
@@ -130,7 +111,7 @@ export default {
     },
     changePage(page) {
       this.currPage = page;
-      this.getListProduct({currPage: this.currPage}).then(r => {
+      this.getListBanner({currPage: this.currPage}).then(r => {
         this.list = r.data.data.data
       }).catch(e => {
         console.log(e)

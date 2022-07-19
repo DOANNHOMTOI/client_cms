@@ -164,6 +164,23 @@
               </ul>
             </div>
           </li>
+          <li>
+            <a href="#sidebarBanner" data-toggle="collapse">
+              <i class="mdi mdi-lifebuoy"></i>
+              <span>Banner </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarBanner">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/banner">List</router-link>
+                </li>
+                <li>
+                  <router-link to="/banner/add">Upload Banner</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
         </ul>
 
       </div>

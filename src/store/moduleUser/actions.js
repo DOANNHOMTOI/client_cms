@@ -3,14 +3,16 @@ import {axiosInstance} from "../../helpers/axiosInstance";
 import store from "../index";
 import router from "../../router";
 async function uploadFile(data) {
-  console.log('data', data)
+  console.log('data uploadFile', data)
   let image_id = null
   let file1 = null
   let file2 = null
   let file3 = null
   const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
   const formData = new FormData()
-  formData.append('file', data.image_id)
+  if (data.image_id !== '') {
+    formData.append('file', data.image_id)
+  }
   // eslint-disable-next-line camelcase
 
   if (data.image_id !== '') {
@@ -250,6 +252,26 @@ export default {
       return false;
     }
   },
+  async getListBanner({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      let endPoint = `/api/banner?page=${data.currPage}`;
+      commit('SHOW_LOADING', true)
+
+      return await axiosInstance.get(endPoint,{headers : headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
   async createProductAPI({commit, state}, data) {
     commit('SHOW_LOADING', true)
     try {
@@ -291,11 +313,75 @@ export default {
       return false
     }
   },
+  async createBannerAPI({commit, state}, data) {
+    commit('SHOW_LOADING', true)
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+
+      const formData = new FormData()
+      formData.append('file', data.image_id)
+      await axiosInstance.post('/api/upload', formData, { headers })
+        // eslint-disable-next-line consistent-return
+        .then(async response => {
+          // If request is good...
+          console.log('response /api/upload', response)
+          data.image = response.data.data
+          await axiosInstance.post('/api/banner', data, { headers })
+            // eslint-disable-next-line consistent-return
+            .then(async res2 => {
+              // If request is good...
+              console.log('res2 createBannerAPI', res2)
+              await commit('SHOW_LOADING', false)
+              if (res2.data.success){
+                alert('create success')
+                await router.push('/banner');
+              }else{
+                alert(res2.data.message)
+              }
+            })
+            .catch(error => {
+              console.log(error)
+              alert('Create Fail !')
+              commit('SHOW_LOADING', false)
+              return false
+            })
+        })
+        .catch(error => {
+          console.log(error)
+          alert('Create Fail !')
+          commit('SHOW_LOADING', false)
+          return false
+        })
+
+    } catch (error) {
+      console.log(error)
+      commit('SHOW_LOADING', false)
+      return false
+    }
+  },
   async getProductDetail({commit, state}, id) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
       return await axiosInstance.get(`/api/product/${id}`,{headers: headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async getBannerDetail({commit, state}, id) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      return await axiosInstance.get(`/api/banner/${id}`,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
@@ -347,6 +433,35 @@ export default {
         console.log('e', e)
         alert('Upload File Fail !')
       })
+    } catch (error) {
+      console.log(error)
+      commit('SHOW_LOADING', false)
+      return false
+    }
+  },
+  async updateBannerAPI({commit, state}, data) {
+    commit('SHOW_LOADING', true)
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      await axiosInstance.put(`/api/banner/${data.id}`, data, { headers })
+        // eslint-disable-next-line consistent-return
+        .then(async response => {
+          // If request is good...
+          console.log('response update banner', response)
+          await commit('SHOW_LOADING', false)
+          if (response.data.success){
+            alert('update success')
+            await router.push('/banner');
+          }else{
+            alert(response.data.message)
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          alert('update Fail !')
+          commit('SHOW_LOADING', false)
+          return false
+        })
     } catch (error) {
       console.log(error)
       commit('SHOW_LOADING', false)
@@ -453,6 +568,24 @@ export default {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
       return await axiosInstance.get('/api/report/order',{headers : headers,params: data}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async getDataGuest({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      return await axiosInstance.get('/api/report/guest',{headers : headers,params: data}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })
