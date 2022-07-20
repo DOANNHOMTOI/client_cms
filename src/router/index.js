@@ -22,6 +22,12 @@ import RatingList from "../pages/rating/RatingList";
 import BannerList from "../pages/banner/BannerList";
 import BannerAdd from "../pages/banner/BannerAdd";
 import BannerEdit from "../pages/banner/BannerEdit";
+import PermissionList from "../pages/permission/PermissionList";
+import PermissionAdd from "../pages/permission/PermissionAdd";
+import PermissionEdit from "../pages/permission/PermissionEdit";
+import UserList from "../pages/user/UserList";
+import UserAdd from "../pages/user/UserAdd";
+import UserEdit from "../pages/user/UserEdit";
 
 Vue.use(Router)
 
@@ -116,6 +122,42 @@ export default new Router({
       path: '/banner/:id',
       name: 'BannerEdit',
       component: BannerEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/permission',
+      name: 'PermissionList',
+      component: PermissionList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/permission/add',
+      name: 'PermissionAdd',
+      component: PermissionAdd,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/permission/:id',
+      name: 'PermissionEdit',
+      component: PermissionEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/user',
+      name: 'UserList',
+      component: UserList,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/user/add',
+      name: 'UserAdd',
+      component: UserAdd,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/user/:id',
+      name: 'UserEdit',
+      component: UserEdit,
       beforeEnter: ifAuthenticated
     },
     {

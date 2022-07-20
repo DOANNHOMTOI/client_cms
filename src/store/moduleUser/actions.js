@@ -104,6 +104,44 @@ export default {
       return false;
     }
   },
+  async getListPermission({commit, state}, currPage) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('currPage', currPage)
+      return await axiosInstance.get(`/api/permission?page=${currPage}`,{headers : headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async getListPartner({commit, state}, currPage) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('currPage', currPage)
+      return await axiosInstance.get(`/api/partner?page=${currPage}`,{headers : headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
   async getListOrder({commit, state}, data) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
@@ -150,12 +188,71 @@ export default {
       return false;
     }
   },
+  async createPermissionAPI({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.post(`/api/permission`,data,{headers: headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async createPartnerAPI({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.post(`/api/partner`,data,{headers: headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          alert('Email đã tồn tại tài khoản !')
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      alert('Có lỗi xảy ra !')
+      return false;
+    }
+  },
   async updateProductCategory({commit, state}, data) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
       console.log('data', data)
       return await axiosInstance.put(`/api/product-category/${data.id}`,data,{headers: headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async deletePartner({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.delete(`/api/partner/${data.id}`,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })

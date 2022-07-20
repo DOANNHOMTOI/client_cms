@@ -181,6 +181,37 @@
               </ul>
             </div>
           </li>
+          <li>
+            <a href="#sidebarPermission" data-toggle="collapse">
+              <i class="mdi mdi-lifebuoy"></i>
+              <span>Permission </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarPermission">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/permission">List</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#sidebarUser" data-toggle="collapse">
+              <i class="mdi mdi-lifebuoy"></i>
+              <span>Partner </span>
+              <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarUser">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/user">List</router-link>
+                </li>
+                <li>
+                  <router-link to="/user/add">Add</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
         </ul>
 
       </div>
