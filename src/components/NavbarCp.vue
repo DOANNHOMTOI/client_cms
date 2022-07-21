@@ -13,7 +13,7 @@
           <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
             <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <a @click="handleLogout()" href="javascript:void(0);" class="dropdown-item notify-item">
               <i class="fe-log-out"></i>
               <span>Logout</span>
             </a>
@@ -63,11 +63,32 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "NavbarCp",
   data(){
     return{
-      user : JSON.parse(localStorage.getItem('i4sign_in'))
+      user : JSON.parse(localStorage.getItem('USER_INFO_VPS')),
+    }
+  },
+  created() {
+    this.getListPermissionByUser(this.user.id).then(r=>{
+      console.log('res getListPermissionByUser', r)
+      console.log('r.data.data.name',r.data.data)
+      this.$store.commit('SET_PERMISSION_LOCAL_STORAGE',JSON.stringify(r.data.data.name))
+      // localStorage.setItem('permissions',JSON.stringify(r.data.data.name))
+    }).catch(e=>{
+      console.log(e)
+    })
+  },
+  methods:{
+    ...mapActions(['getListPermissionByUser']),
+    handleLogout(){
+      localStorage.removeItem('ACCESS_TOKEN');
+      localStorage.removeItem('USER_INFO_VPS');
+      localStorage.removeItem('i4sign_in');
+      this.$router.push('/login')
     }
   }
 }

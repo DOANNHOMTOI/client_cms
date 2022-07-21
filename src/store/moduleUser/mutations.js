@@ -16,4 +16,8 @@ export default {
     state.ACCESS_TOKEN = payload.accessToken;
     state.currentUser = payload.userVps
   },
+  SET_PERMISSION_LOCAL_STORAGE(state, payload) {
+    localStorage.setItem('permissions', payload);
+    state.permissionUser = payload
+  },
 }

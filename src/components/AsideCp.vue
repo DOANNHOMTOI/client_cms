@@ -57,7 +57,7 @@
           <li class="menu-title mt-2">Apps</li>
 
 
-          <li>
+          <li v-if="getPermissionUser.includes('viewCategory') || getPermissionUser.includes('createCategory') || getPermissionUser.includes('editCategory')">
             <a href="#sidebarEcommerce" data-toggle="collapse">
               <i class="mdi mdi-text-box-multiple-outline"></i>
               <span>  Category </span>
@@ -65,16 +65,16 @@
             </a>
             <div class="collapse" id="sidebarEcommerce">
               <ul class="nav-second-level">
-                <li>
+                <li v-if="getPermissionUser.includes('viewCategory')">
                   <router-link to="/product-category/list">List</router-link>
                 </li>
-                <li>
+                <li v-if="getPermissionUser.includes('createCategory')">
                   <router-link to="/product-category/add">Add</router-link>
                 </li>
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="getPermissionUser.includes('viewProduct') || getPermissionUser.includes('createProduct') || getPermissionUser.includes('editProduct')">
             <a href="#sidebarProduct" data-toggle="collapse">
               <i class="mdi mdi-layers-outline"></i>
               <span> Product </span>
@@ -82,16 +82,16 @@
             </a>
             <div class="collapse" id="sidebarProduct">
               <ul class="nav-second-level">
-                <li>
+                <li v-if="getPermissionUser.includes('viewProduct')">
                   <router-link to="/product/list">List</router-link>
                 </li>
-                <li>
+                <li v-if="getPermissionUser.includes('createProduct')">
                   <router-link to="/product/add">Add</router-link>
                 </li>
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="getPermissionUser.includes('viewVoucher') || getPermissionUser.includes('createVoucher') || getPermissionUser.includes('editVoucher')">
             <a href="#sidebarVoucher" data-toggle="collapse">
               <i class="mdi mdi-gift-outline"></i>
               <span>Voucher </span>
@@ -99,16 +99,16 @@
             </a>
             <div class="collapse" id="sidebarVoucher">
               <ul class="nav-second-level">
-                <li>
+                <li v-if="getPermissionUser.includes('viewVoucher')">
                   <router-link to="/voucher/list">List</router-link>
                 </li>
-                <li>
+                <li v-if="getPermissionUser.includes('createVoucher')">
                   <router-link to="/voucher/add">Add</router-link>
                 </li>
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="getPermissionUser.includes('viewCustomer')">
             <a href="#sidebarCustomer" data-toggle="collapse">
               <i class="mdi mdi-account-multiple-outline"></i>
               <span>Customer </span>
@@ -122,7 +122,7 @@
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="getPermissionUser.includes('viewOrder')">
             <a href="#sidebarOrder" data-toggle="collapse">
               <i class="mdi mdi-cart-outline"></i>
               <span>Order </span>
@@ -136,7 +136,7 @@
               </ul>
             </div>
           </li>
-          <li>
+          <li  v-if="getPermissionUser.includes('viewGuest')">
             <a href="#sidebarGuest" data-toggle="collapse">
               <i class="mdi mdi-account-circle-outline"></i>
               <span>Guest </span>
@@ -150,7 +150,7 @@
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="getPermissionUser.includes('viewRating')">
             <a href="#sidebarRate" data-toggle="collapse">
               <i class="mdi mdi-lifebuoy"></i>
               <span>Rating </span>
@@ -164,7 +164,7 @@
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="getPermissionUser.includes('viewBanner') || getPermissionUser.includes('uploadBanner')">
             <a href="#sidebarBanner" data-toggle="collapse">
               <i class="mdi mdi-lifebuoy"></i>
               <span>Banner </span>
@@ -172,16 +172,16 @@
             </a>
             <div class="collapse" id="sidebarBanner">
               <ul class="nav-second-level">
-                <li>
+                <li v-if="getPermissionUser.includes('viewBanner')">
                   <router-link to="/banner">List</router-link>
                 </li>
-                <li>
+                <li v-if="getPermissionUser.includes('uploadBanner')">
                   <router-link to="/banner/add">Upload Banner</router-link>
                 </li>
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="JSON.parse(getMe).id == 1">
             <a href="#sidebarPermission" data-toggle="collapse">
               <i class="mdi mdi-lifebuoy"></i>
               <span>Permission </span>
@@ -195,7 +195,7 @@
               </ul>
             </div>
           </li>
-          <li>
+          <li v-if="JSON.parse(getMe).id == 1">
             <a href="#sidebarUser" data-toggle="collapse">
               <i class="mdi mdi-lifebuoy"></i>
               <span>Partner </span>
@@ -226,9 +226,12 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+import {mapGetters} from 'vuex'
 export default {
   name: "AsideCp",
   computed:{
+    ...mapGetters(['getPermissionUser','getMe']),
     nameRoute : function (){
       return this.$route.name;
     },
@@ -240,6 +243,15 @@ export default {
     }
   },
   created() {
+    // this.getListPermissionByUser(this.$route.params.id).then(r=>{
+    //   console.log('res getListPermissionByUser', r)
+    //   this.permissionsSelected = r.data.data.id
+    // }).catch(e=>{
+    //   console.log(e)
+    // })
+  },
+  methods: {
+    // ...mapActions(['updatePermissionUser','getListPermission','getListPermissionByUser']),
 
   },
 }

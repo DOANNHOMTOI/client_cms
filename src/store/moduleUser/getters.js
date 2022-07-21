@@ -8,5 +8,11 @@ export default {
     } else {
       return false;
     }
+  },
+  getPermissionUser: state => {
+    return state.permissionUser;
+  },
+  getMe: state => {
+    return state.currentUser;
   }
 }

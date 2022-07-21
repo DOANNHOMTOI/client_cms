@@ -123,6 +123,24 @@ export default {
       return false;
     }
   },
+  async getListPermissionByUser({commit, state}, id) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      return await axiosInstance.get(`/api/permissionByUser/${id}`,{headers : headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
   async getListPartner({commit, state}, currPage) {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
@@ -234,6 +252,25 @@ export default {
       commit('SHOW_LOADING', true);
       console.log('data', data)
       return await axiosInstance.put(`/api/product-category/${data.id}`,data,{headers: headers}).then(r => {
+        commit('SHOW_LOADING', false);
+        return r
+      })
+        .catch(e => {
+          commit('SHOW_LOADING', false);
+          console.log(e)
+        });
+
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  async updatePermissionUser({commit, state}, data) {
+    try {
+      const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
+      commit('SHOW_LOADING', true);
+      console.log('data', data)
+      return await axiosInstance.post(`/api/permission-assign`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
       })

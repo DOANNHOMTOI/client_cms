@@ -28,6 +28,7 @@ import PermissionEdit from "../pages/permission/PermissionEdit";
 import UserList from "../pages/user/UserList";
 import UserAdd from "../pages/user/UserAdd";
 import UserEdit from "../pages/user/UserEdit";
+import Permissions from "../pages/user/Permissions";
 
 Vue.use(Router)
 
@@ -158,6 +159,12 @@ export default new Router({
       path: '/user/:id',
       name: 'UserEdit',
       component: UserEdit,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/user-permission/:id',
+      name: 'Permissions',
+      component: Permissions,
       beforeEnter: ifAuthenticated
     },
     {
