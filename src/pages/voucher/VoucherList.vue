@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12">
         <div class="page-title-box">
-          <div class="page-title-right">
+          <div v-if="getPermissionUser.includes('createVoucher')" class="page-title-right">
             <router-link to="/voucher/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
           <h4 class="page-title">Voucher</h4>
@@ -48,7 +48,7 @@
                 <td>{{ timeBW(item.end_time)  }}</td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
-                  <router-link :to="'/voucher/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
+                  <router-link v-if="getPermissionUser.includes('editVoucher')" :to="'/voucher/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
                 </td>
               </tr>
               </tbody>
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
 export default {
   name: "VoucherList",
@@ -87,6 +87,9 @@ export default {
       currPage : 1,
       totalPage: 1
     }
+  },
+  computed:{
+    ...mapGetters(['getPermissionUser']),
   },
   created() {
     this.getListVoucher(this.currPage).then(r=>{

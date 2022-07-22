@@ -88,7 +88,8 @@ export default {
       localStorage.removeItem('ACCESS_TOKEN');
       localStorage.removeItem('USER_INFO_VPS');
       localStorage.removeItem('i4sign_in');
-      this.$router.push('/login')
+      // this.$router.push('/login')
+      window.location.href = '/login'
     }
   }
 }

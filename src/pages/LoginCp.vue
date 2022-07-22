@@ -85,7 +85,8 @@ export default {
       }
       this.login(data).then(res => {
         if (res.status == 200 && res.data.success) {
-          this.$router.push('/');
+          // this.$router.push('/');
+          window.location.href = '/'
         } else {
           alert('Login Failed !')
         }

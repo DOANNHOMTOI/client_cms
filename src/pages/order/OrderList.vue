@@ -59,7 +59,7 @@
                 </td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
-                  <router-link :to="'/order/' + item.id" class="btn btn-warning waves-effect waves-light">VIEW</router-link>
+                  <router-link v-if="getPermissionUser.includes('showVoucher')"  :to="'/order/' + item.id" class="btn btn-warning waves-effect waves-light">VIEW</router-link>
                 </td>
               </tr>
               </tbody>
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
 export default {
   name: "OrderList",
@@ -100,6 +100,9 @@ export default {
       sku:"",
       phone: ""
     }
+  },
+  computed:{
+    ...mapGetters(['getPermissionUser']),
   },
   created() {
     this.getListOrder({currPage: this.currPage}).then(r=>{

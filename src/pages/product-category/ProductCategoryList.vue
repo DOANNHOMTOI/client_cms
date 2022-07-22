@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12">
         <div class="page-title-box">
-          <div class="page-title-right">
+          <div class="page-title-right" v-if="getPermissionUser.includes('createCategory')">
             <router-link to="/product-category/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
           <h4 class="page-title"> Category</h4>
@@ -42,7 +42,7 @@
                 </td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
-                  <router-link :to="'/product-category/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
+                  <router-link v-if="getPermissionUser.includes('editCategory')" :to="'/product-category/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
                 </td>
               </tr>
               </tbody>
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
 export default {
   name: "ProductCategoryList",
@@ -91,6 +91,9 @@ export default {
     }).catch(e=>{
       console.log(e)
     })
+  },
+  computed:{
+    ...mapGetters(['getPermissionUser']),
   },
   methods: {
     ...mapActions(['getListProductCategory']),

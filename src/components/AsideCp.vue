@@ -166,7 +166,7 @@
           </li>
           <li v-if="getPermissionUser.includes('viewBanner') || getPermissionUser.includes('uploadBanner')">
             <a href="#sidebarBanner" data-toggle="collapse">
-              <i class="mdi mdi-lifebuoy"></i>
+              <i class="mdi mdi-map-outline"></i>
               <span>Banner </span>
               <span class="menu-arrow"></span>
             </a>
@@ -183,7 +183,7 @@
           </li>
           <li v-if="JSON.parse(getMe).id == 1">
             <a href="#sidebarPermission" data-toggle="collapse">
-              <i class="mdi mdi-lifebuoy"></i>
+              <i class="mdi mdi-share-variant"></i>
               <span>Permission </span>
               <span class="menu-arrow"></span>
             </a>
@@ -197,7 +197,7 @@
           </li>
           <li v-if="JSON.parse(getMe).id == 1">
             <a href="#sidebarUser" data-toggle="collapse">
-              <i class="mdi mdi-lifebuoy"></i>
+              <i class="mdi mdi-book-account-outline"></i>
               <span>Partner </span>
               <span class="menu-arrow"></span>
             </a>

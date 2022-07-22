@@ -5,7 +5,7 @@
       <div class="col-12">
         <div class="page-title-box">
           <div class="page-title-right">
-            <router-link to="/banner/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
+            <router-link v-if="getPermissionUser.includes('uploadBanner')" to="/banner/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
           <h4 class="page-title">Banner</h4>
         </div>
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
 
 export default {
@@ -96,6 +96,9 @@ export default {
     }).catch(e => {
       console.log(e)
     })
+  },
+  computed:{
+    ...mapGetters(['getPermissionUser']),
   },
   methods: {
     ...mapActions(['getListBanner']),

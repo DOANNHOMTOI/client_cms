@@ -46,7 +46,7 @@
                 </td>
                 <td>{{ convertMoment(item.created_at)  }}</td>
                 <td>
-                  <button @click="acceptRate(item.id)" v-if="!item.status" class="btn btn-primary waves-effect waves-light">DUYỆT ĐÁNH GIÁ</button>
+                  <button @click="acceptRate(item.id)" v-if="getPermissionUser.includes('acceptRating') && !item.status" class="btn btn-primary waves-effect waves-light">DUYỆT ĐÁNH GIÁ</button>
 <!--                  <router-link :to="'/voucher/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>-->
                 </td>
               </tr>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
 export default {
   name: "RatingList",
@@ -86,6 +86,9 @@ export default {
       currPage : 1,
       totalPage: 1
     }
+  },
+  computed:{
+    ...mapGetters(['getPermissionUser']),
   },
   created() {
     this.getListRating(this.currPage).then(r=>{
