@@ -67,7 +67,6 @@ export default {
     }
   },
   async checkLogin({commit, dispatch}) {
-    console.log('check login')
     try {
       let userLocal = localStorage.getItem('i4sign_in');
       let userVps = localStorage.getItem('USER_INFO_VPS');
@@ -363,7 +362,6 @@ export default {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       let endPoint = `/api/product?page=${data.currPage}`;
       commit('SHOW_LOADING', true)
-      console.log('currPage', data.currPage)
 
       if (data.sku !== '' && data.sku !== undefined){
         endPoint += `&sku=${data.sku}`

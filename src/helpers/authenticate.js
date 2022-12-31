@@ -15,7 +15,6 @@ const ifNotAuthenticated = (to, from, next) => {
 }
 
 const ifAuthenticated = (to, from, next) => {
-  console.log('store.getters.getStatusLogin', store.getters.getStatusLogin)
   if(store.getters.getStatusLogin === true) {
     next(); // Cho phép vào
   } else {

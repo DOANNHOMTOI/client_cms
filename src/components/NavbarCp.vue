@@ -74,8 +74,6 @@ export default {
   },
   created() {
     this.getListPermissionByUser(this.user.id).then(r=>{
-      console.log('res getListPermissionByUser', r)
-      console.log('r.data.data.name',r.data.data)
       this.$store.commit('SET_PERMISSION_LOCAL_STORAGE',JSON.stringify(r.data.data.name))
       // localStorage.setItem('permissions',JSON.stringify(r.data.data.name))
     }).catch(e=>{

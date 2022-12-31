@@ -1,5 +1,5 @@
 export const config = {
-  url_api_back_end : "http://localhost:8010/proxy",
+  url_api_back_end : "http://127.0.0.1:8000/",
   url_api_back_end_real : "http://127.0.0.1:8000/",
   url_api_vultr_service : "https://api.vultr.com/v2",
   url_api_digital_ocean_service : "https://api.digitalocean.com/v2",

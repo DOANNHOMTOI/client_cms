@@ -111,7 +111,6 @@ export default {
   },
   created() {
     this.getListProduct({currPage:this.currPage}).then(r => {
-      console.log('res getListProduct', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
