@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="row">
+          <div v-if="order" class="row">
             <div class="col-md-6">
               <div class="mt-3">
                 <p>Mã đơn hàng : <b style="font-size: 20px">{{ order.sku }}</b></p>
@@ -85,7 +85,7 @@
           </div>
           <!-- end row -->
 
-          <div class="row">
+          <div v-if="order" class="row">
             <div class="col-12">
               <div class="table-responsive">
                 <table class="table mt-4 table-centered">
@@ -98,8 +98,8 @@
                       <th style="width: 10%">Số lượng</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr v-for="(pr, i) in order.products">
+                  <tbody v-if="order">
+                    <tr v-for="(pr, i) in JSON.parse(order.products)">
                       <td>{{ i + 1 }}</td>
                       <td>
                         <b>{{ pr.product.name }}</b> <br>
@@ -116,7 +116,7 @@
           </div>
           <!-- end row -->
 
-          <div class="row">
+          <div v-if="order" class="row">
             <div class="col-sm-6">
               <div class="clearfix pt-5">
                 <h6 class="text-muted">Ghi chú:</h6>
@@ -140,7 +140,7 @@
             <div>
 
             </div>
-            <div class="text-right d-print-none">
+            <div v-if="order" class="text-right d-print-none">
               <h5 style="color:black;margin-bottom: 20px">Cập nhật trạng thái đơn hàng</h5>
               <a v-if="order.status != 1" @click="changeSTT(1)" href="#"
                 class="btn btn-primary waves-effect waves-light">NEW</a>
@@ -175,7 +175,6 @@ export default {
   },
   created() {
     this.getOrderDetail(this.$route.params.id).then(r => {
-      console.log('getOrderDetail', r)
       this.order = r.data.data
     })
   },

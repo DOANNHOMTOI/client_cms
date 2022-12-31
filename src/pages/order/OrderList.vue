@@ -107,8 +107,7 @@ export default {
   },
   created() {
     this.getListOrder({ currPage: this.currPage }).then(r => {
-      console.log('res getListOrder', r)
-      this.list = r.data.data.data
+       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
     }).catch(e => {
@@ -122,8 +121,7 @@ export default {
     },
     searchOrder() {
       this.getListOrder({ currPage: this.currPage, sku: this.sku, phone: this.phone }).then(r => {
-        console.log('res getListOrder filter', r)
-        this.list = r.data.data.data
+         this.list = r.data.data.data
         this.currPage = r.data.data.current_page
         this.totalPage = r.data.data.last_page
       }).catch(e => {

@@ -122,7 +122,6 @@ export default {
     ...mapActions(['getListProduct']),
     searchProduct(){
       this.getListProduct({currPage:this.currPage,sku: this.sku,name: this.name}).then(r => {
-        console.log('res getListProduct filter', r)
         this.list = r.data.data.data
         this.currPage = r.data.data.current_page
         this.totalPage = r.data.data.last_page
