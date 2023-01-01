@@ -52,6 +52,7 @@ export default {
 
       let result = await axiosInstance.post('/api/login', obj);
       if (result.data.success) {
+        
         // commit('SET_USER_INFO', result.data.user);
         commit('SET_TOKEN_LOCAL_STORAGE', {result, obj});
         return result;
