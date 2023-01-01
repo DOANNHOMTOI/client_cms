@@ -54,7 +54,6 @@ export default {
   },
   created() {
     this.getProductCategory(this.$route.params.id).then(r => {
-      console.log('getProductCategory', r)
       this.name = r.data.data.name
       this.position = r.data.data.position
       this.is_active = r.data.data.is_active

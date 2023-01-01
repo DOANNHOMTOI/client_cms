@@ -79,7 +79,6 @@ export default {
   async handleCreateDropLetDO({commit, dispatch}, data) {
     try {
       commit('SHOW_LOADING', true);
-      console.log('data create', JSON.stringify(data))
       await axiosDigitalOceanService.post(`/droplets`, data)
         .then(async function (response) {
           await axiosInstance.post(`digital-ocean/droplet/create`, response.data.droplet)

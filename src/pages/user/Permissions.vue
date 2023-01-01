@@ -53,13 +53,11 @@ export default {
   },
   created() {
     this.getListPermission(-1).then(r=>{
-      console.log('res getListPermission', r)
       this.list = r.data.data.data
     }).catch(e=>{
       console.log(e)
     })
     this.getListPermissionByUser(this.$route.params.id).then(r=>{
-      console.log('res getListPermissionByUser', r)
       this.permissionsSelected = r.data.data.id
     }).catch(e=>{
       console.log(e)

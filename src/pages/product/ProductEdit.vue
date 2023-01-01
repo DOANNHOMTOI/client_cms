@@ -250,9 +250,7 @@ export default {
         image_2: this.file2,
         image_3: this.file3,
       }
-      console.log('obj', obj)
       this.updateProductAPI(obj).then(r => {
-        console.log('r updateProductAPI', r)
       }).catch(e => {
         console.log('e', e)
       })

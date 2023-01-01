@@ -95,7 +95,6 @@ export default {
   },
   created() {
     this.getBannerDetail(this.$route.params.id).then(r => {
-      console.log('getBannerDetail', r)
       this.title = r.data.data.title
       this.image = r.data.data.image
       this.is_active = r.data.data.is_active
@@ -126,9 +125,7 @@ export default {
         is_active: parseInt(this.is_active),
         image_id: this.file,
       }
-      console.log('obj updateBannerAPI', obj)
       this.updateBannerAPI(obj).then(r => {
-        console.log('r updateBannerAPI', r)
       }).catch(e => {
         console.log('e', e)
       })

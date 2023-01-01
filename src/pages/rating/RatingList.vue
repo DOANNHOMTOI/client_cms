@@ -92,7 +92,6 @@ export default {
   },
   created() {
     this.getListRating(this.currPage).then(r=>{
-      console.log('res getListRating', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
@@ -127,10 +126,7 @@ export default {
       })
     },
     timeBW(timestamp){
-      console.log('item.start_time', timestamp)
       var date = new Date(parseInt(timestamp));
-
-      console.log('DATE,', date)
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var day = date.getDate();

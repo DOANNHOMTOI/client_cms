@@ -102,7 +102,6 @@ export default {
         image_id: this.file,
       }
       this.createBannerAPI(obj).then(r => {
-        console.log('r createBannerAPI', r)
       }).catch(e => {
         console.log('e', e)
       })
