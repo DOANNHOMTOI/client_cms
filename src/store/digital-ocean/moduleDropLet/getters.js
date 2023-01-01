@@ -2,7 +2,6 @@ import {isEmptyObject} from "../../../helpers";
 
 export default {
   getterListDropLetDO: state => {
-    console.log('state', state)
     return state.listDropLetDO;
   },
   getterTotalDropLetDO: state => {

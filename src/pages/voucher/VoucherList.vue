@@ -28,6 +28,7 @@
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Active</th>
+                <th>Qty</th>
                 <th>Created At</th>
                 <th></th>
               </tr>
@@ -46,6 +47,7 @@
                 </td>
                 <td>{{ timeBW(item.start_time)  }}</td>
                 <td>{{ timeBW(item.end_time)  }}</td>
+                <td>{{ item.qty  }}</td>
                 <td>{{ convertMoment(item.created_at) }}</td>
                 <td>
                   <router-link v-if="getPermissionUser.includes('editVoucher')" :to="'/voucher/' + item.id" class="btn btn-warning waves-effect waves-light">Edit</router-link>
@@ -93,7 +95,6 @@ export default {
   },
   created() {
     this.getListVoucher(this.currPage).then(r=>{
-      console.log('res getProductCategory', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
@@ -113,10 +114,7 @@ export default {
       })
     },
     timeBW(timestamp){
-      console.log('item.start_time', timestamp)
       var date = new Date(parseInt(timestamp));
-
-      console.log('DATE,', date)
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var day = date.getDate();

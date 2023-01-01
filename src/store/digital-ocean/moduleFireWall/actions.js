@@ -35,7 +35,7 @@ export default {
       await axiosDigitalOceanService.post(`/firewalls`, data)
         .then(async function (response) {
 
-          console.log('response create droplet', response)
+          ('response create droplet', response)
           await axiosInstance.post(`digital-ocean/firewall/create`, response.data.firewall)
 
           dispatch('showNotification', {title: 'Success !', type: 'success', duration: 5000, text: 'Creat FireWall Success !'})
@@ -164,10 +164,8 @@ export default {
       let obj = {
         inbound_rules: data.inbound_rules
       }
-      console.log('OBJ', obj)
       await axiosDigitalOceanService.post(`/firewalls/${data.firewallId}/rules`,obj)
         .then(function (response) {
-          console.log('RES SUCCESS', response)
           commit('SHOW_LOADING', false);
           dispatch('showNotification', {title: 'Success !', type: 'success', duration: 5000, text: 'Add Rule Success !'})
           // this.$router.push({name: 'digital-ocean-list-firewall'})

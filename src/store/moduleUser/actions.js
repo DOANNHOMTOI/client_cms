@@ -3,7 +3,6 @@ import {axiosInstance} from "../../helpers/axiosInstance";
 import store from "../index";
 import router from "../../router";
 async function uploadFile(data) {
-  console.log('data uploadFile', data)
   let image_id = null
   let file1 = null
   let file2 = null
@@ -52,7 +51,6 @@ export default {
       }
 
       let result = await axiosInstance.post('/api/login', obj);
-      console.log('result', result)
       if (result.data.success) {
         // commit('SET_USER_INFO', result.data.user);
         commit('SET_TOKEN_LOCAL_STORAGE', {result, obj});
@@ -228,7 +226,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.post(`/api/partner`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -249,7 +246,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.put(`/api/product-category/${data.id}`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -268,7 +264,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.post(`/api/permission-assign`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -287,7 +282,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.delete(`/api/partner/${data.id}`,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -306,7 +300,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.put(`/api/order/${data.id}`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -415,12 +408,10 @@ export default {
         if (res.file3 != null) arrImages.push(res.file3.data.data)
         data.image = res.image_id.data.data
         data.images = arrImages.join(',')
-        console.log(JSON.stringify(data))
         await axiosInstance.post('/api/product', data, { headers })
           // eslint-disable-next-line consistent-return
           .then(async response => {
             // If request is good...
-            console.log('response create product', response)
             await commit('SHOW_LOADING', false)
             if (response.data.success){
               alert('create success')
@@ -456,13 +447,11 @@ export default {
         // eslint-disable-next-line consistent-return
         .then(async response => {
           // If request is good...
-          console.log('response /api/upload', response)
           data.image = response.data.data
           await axiosInstance.post('/api/banner', data, { headers })
             // eslint-disable-next-line consistent-return
             .then(async res2 => {
               // If request is good...
-              console.log('res2 createBannerAPI', res2)
               await commit('SHOW_LOADING', false)
               if (res2.data.success){
                 alert('create success')
@@ -541,7 +530,6 @@ export default {
         }
         data.images = arrImages.join(',')
         // console.log(JSON.stringify(data))
-        console.log(data)
         await axiosInstance.put(`/api/product/${data.id}`, data, { headers })
           // eslint-disable-next-line consistent-return
           .then(async response => {
@@ -579,7 +567,6 @@ export default {
         // eslint-disable-next-line consistent-return
         .then(async response => {
           // If request is good...
-          console.log('response update banner', response)
           await commit('SHOW_LOADING', false)
           if (response.data.success){
             alert('update success')
@@ -604,7 +591,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
       return await axiosInstance.get(`/api/voucher?page=${currPage}`,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -623,7 +609,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
       return await axiosInstance.get(`/api/customer?page=${currPage}`,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -642,7 +627,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
       return await axiosInstance.get(`/api/guest?page=${currPage}`,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -661,7 +645,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
       return await axiosInstance.get(`/api/rating?page=${currPage}`,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -680,7 +663,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('currPage', currPage)
       return await axiosInstance.get(`/api/dash`,{headers : headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -735,7 +717,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.post(`/api/voucher`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -772,7 +753,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.put(`/api/voucher/${data.id}`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r
@@ -791,7 +771,6 @@ export default {
     try {
       const headers = {Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN')};
       commit('SHOW_LOADING', true);
-      console.log('data', data)
       return await axiosInstance.put(`/api/rating/${data.id}`,data,{headers: headers}).then(r => {
         commit('SHOW_LOADING', false);
         return r

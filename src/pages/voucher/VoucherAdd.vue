@@ -23,11 +23,16 @@
           </div>
           <div class="form-group mb-3">
             <label for="code">Code</label>
-            <input style="background-color: lightgray" disabled readonly v-model="code" type="text" id="code" class="form-control" min="6" max="6">
+            <input style="background-color: lightgray" disabled readonly v-model="code" type="text" id="code"
+              class="form-control" min="6" max="6">
           </div>
           <div class="form-group mb-3">
             <label>Title</label>
             <input v-model="title" type="text" class="form-control">
+          </div>
+          <div class="form-group mb-3">
+            <label>Qty</label>
+            <input v-model="qty" type="text" class="form-control">
           </div>
           <div class="form-group mb-3">
             <label>Percent (%)</label>
@@ -51,7 +56,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "VoucherAdd",
@@ -62,19 +67,20 @@ export default {
       percent_value: "",
       startTime: "",
       endTime: "",
+      qty: 1,
       errors: [],
     }
   },
-  computed:{
+  computed: {
 
   },
   methods: {
     ...mapActions(['createVoucherAPI']),
     makeid(length) {
-      var result           = '';
-      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var result = '';
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       var charactersLength = characters.length;
-      for ( var i = 0; i < length; i++ ) {
+      for (var i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() *
           charactersLength));
       }
@@ -84,19 +90,18 @@ export default {
       this.errors = []
       if (!this.checkForm()) return false;
 
-      console.log(new Date(this.startTime).getTime())
-      this.createVoucherAPI({code: this.code,title: this.title,percent_value: this.percent_value,start_time: new Date(this.startTime).getTime(),end_time: new Date(this.endTime).getTime()}).then(r => {
-        if (r.data.success){
+      this.createVoucherAPI({ qty: this.qty, code: this.code, title: this.title, percent_value: this.percent_value, start_time: new Date(this.startTime).getTime(), end_time: new Date(this.endTime).getTime() }).then(r => {
+        if (r.data.success) {
           alert('Success !')
           this.$router.push('/voucher/list')
-        }else{
+        } else {
           alert('Create Fail !')
         }
       }).catch(e => {
         console.log('e', e)
       })
     },
-    checkForm(){
+    checkForm() {
       let flag = true;
       if (this.code.length != 6) {
         this.errors.push('code is required 6 character !');

@@ -344,20 +344,17 @@ export default {
   },
   created() {
     this.getDataDash(-1).then(r=>{
-      console.log('res getDataDash', r)
       this.total = r.data.data.total
       this.recent = r.data.data.recent
     }).catch(e=>{
       console.log(e)
     })
     this.getDataOrder(null).then(r=>{
-      console.log('res getDataOrder', r)
       this.orders = r.data.data
     }).catch(e=>{
       console.log(e)
     })
     this.getDataGuest(null).then(r=>{
-      console.log('res getDataGuest', r)
       this.guest = r.data.data
     }).catch(e=>{
       console.log(e)
@@ -381,10 +378,7 @@ export default {
         params.start_time = new Date(this.start_time).getTime()/1000
         params.end_time = new Date(this.end_time).getTime()/1000
       }
-
-      console.log('params search',params )
       this.getDataOrder(params).then(r=>{
-        console.log('res getDataOrder', r)
         this.orders = r.data.data
       }).catch(e=>{
         console.log(e)
@@ -398,8 +392,6 @@ export default {
         params.start_time = new Date(this.start_time_guest).getTime()/1000
         params.end_time = new Date(this.end_time_guest).getTime()/1000
       }
-
-      console.log('params searchGuest',params )
       this.getDataGuest(params).then(r=>{
         console.log('res getDataGuest', r)
         this.guest = r.data.data

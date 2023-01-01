@@ -2,7 +2,6 @@ import {config} from "../../constants/config";
 
 export default {
   SET_TOKEN_LOCAL_STORAGE(state, payload) {
-    console.log('payload',payload)
     localStorage.setItem('ACCESS_TOKEN', payload.result.data.data.access_token);
     localStorage.setItem('USER_INFO_VPS', JSON.stringify(payload.result.data.data.user));
     localStorage.setItem('i4sign_in', JSON.stringify(payload.obj));

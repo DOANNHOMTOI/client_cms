@@ -89,7 +89,6 @@ export default {
   },
   created() {
     this.getListBanner({currPage:this.currPage}).then(r => {
-      console.log('res getListBanner', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
@@ -104,7 +103,6 @@ export default {
     ...mapActions(['getListBanner']),
     searchProduct(){
       this.getListBanner({currPage:this.currPage,sku: this.sku,name: this.name}).then(r => {
-        console.log('res getListBanner filter', r)
         this.list = r.data.data.data
         this.currPage = r.data.data.current_page
         this.totalPage = r.data.data.last_page

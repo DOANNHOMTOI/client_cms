@@ -72,7 +72,6 @@ export default {
   },
   created() {
     this.getListPermission(this.currPage).then(r=>{
-      console.log('res getProductCategory', r)
       this.list = r.data.data.data
       this.currPage = r.data.data.current_page
       this.totalPage = r.data.data.last_page
