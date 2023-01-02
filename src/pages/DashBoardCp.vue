@@ -366,7 +366,8 @@ export default {
       return moment(date).format("YYYY-MM-DD HH:mm:ss");
     },
     convertCurrency(x){
-      return x.toLocaleString('vi-VN') + ' đ'
+      // return x.toLocaleString('vi-VN') + ' đ'
+      return x
     },
     search(){
       let params  = {}
