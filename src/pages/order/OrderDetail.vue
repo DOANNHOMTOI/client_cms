@@ -1,12 +1,9 @@
 <template>
   <div class="container-fluid">
-
     <!-- start page title -->
     <div class="row">
       <div class="col-12">
-        <div class="page-title-box">
-
-        </div>
+        <div class="page-title-box"></div>
       </div>
     </div>
     <!-- end page title -->
@@ -42,8 +39,8 @@
                     order.voucher_id.percent_value
                 }} %</span></b></p>
               </div>
-
-            </div><!-- end col -->
+            </div>
+            <!-- end col -->
             <div class="col-md-4 offset-md-2">
               <div class="mt-3 float-right">
                 <p class="m-b-10"><strong>Trạng Thái : </strong> <span class="float-right">
@@ -59,7 +56,8 @@
                 <p class="m-b-10"><strong>Ngày cập nhật : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp;
                     {{ convertMoment(order.updated_at) }}</span></p>
               </div>
-            </div><!-- end col -->
+            </div>
+            <!-- end col -->
           </div>
           <!-- end row -->
 
@@ -72,7 +70,8 @@
                 <b>Email</b> : {{ order.customer.email }}<br>
                 <b>Address</b> : {{ order.customer.address }}<br>
               </address>
-            </div> <!-- end col -->
+            </div>
+            <!-- end col -->
 
             <div class="col-sm-6">
               <h6>Hình thức thanh toán</h6>
@@ -81,7 +80,8 @@
                 - Thanh toán khi nhận hàng<br>
                 <br>
               </address>
-            </div> <!-- end col -->
+            </div>
+            <!-- end col -->
           </div>
           <!-- end row -->
 
@@ -99,7 +99,7 @@
                     </tr>
                   </thead>
                   <tbody v-if="order">
-                    <tr v-for="(pr, i) in JSON.parse(order.products)">
+                    <tr v-for="(pr, i) in JSON.parse(order.products)" :key="i">
                       <td>{{ i + 1 }}</td>
                       <td>
                         <b>{{ pr.product.name }}</b> <br>
@@ -108,11 +108,12 @@
                       <td>{{ pr.attribute.size }}</td>
                       <td>{{ pr.qty }}</td>
                     </tr>
-
                   </tbody>
                 </table>
-              </div> <!-- end table-responsive -->
-            </div> <!-- end col -->
+              </div>
+              <!-- end table-responsive -->
+            </div>
+            <!-- end col -->
           </div>
           <!-- end row -->
 
@@ -125,14 +126,16 @@
                   {{ order.note }}
                 </small>
               </div>
-            </div> <!-- end col -->
+            </div>
+            <!-- end col -->
             <div class="col-sm-6">
               <div class="float-right" style="display: flex;align-items: baseline">
                 <span style="display: block;padding-right: 20px">Tổng :</span>
                 <h3 style="color:black"> {{ convertCurrency(order.total_price) }}</h3>
               </div>
               <div class="clearfix"></div>
-            </div> <!-- end col -->
+            </div>
+            <!-- end col -->
           </div>
           <!-- end row -->
 
@@ -152,11 +155,12 @@
                 class="btn btn-danger waves-effect waves-light">CANCEL</a>
             </div>
           </div>
-        </div> <!-- end card-box -->
-      </div> <!-- end col -->
+        </div>
+        <!-- end card-box -->
+      </div>
+      <!-- end col -->
     </div>
     <!-- end row -->
-
   </div>
 </template>
 
@@ -171,9 +175,9 @@ export default {
       name: "",
       order: null,
       is_active: 0
-    }
+    };
   },
-  created() {
+  mounted() {
     this.getOrderDetail(this.$route.params.id).then(r => {
       this.order = r.data.data
     })
@@ -190,21 +194,21 @@ export default {
       this.updateSTTOrder({
         id: parseInt(this.$route.params.id),
         status: parseInt(stt)
-      }).then(r => {
-        if (r.data.success) {
-          alert('Cập nhật đơn hàng thành công !')
-          this.$router.push('/order/list')
-        } else {
-          alert('Cập nhật đơn hàng không thành công !')
-        }
-      }).catch(e => {
-        console.log('e', e)
       })
-    },
+        .then(r => {
+          if (r.data.success) {
+            alert("Cập nhật đơn hàng thành công !");
+            this.$router.push("/order/list");
+          } else {
+            alert("Cập nhật đơn hàng không thành công !");
+          }
+        })
+        .catch(e => {
+          console.log("e", e);
+        });
+    }
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

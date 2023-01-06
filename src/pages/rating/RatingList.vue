@@ -32,7 +32,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(item,index) in list">
+              <tr v-for="(item,index) in list" :key="index">
                 <th scope="row">{{ index + 1}}</th>
                 <td>{{ item.product_name  }}</td>
                 <td>{{ item.guest_name  }}</td>
