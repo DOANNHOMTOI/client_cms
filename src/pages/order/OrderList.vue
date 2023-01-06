@@ -40,7 +40,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in list">
+                <tr v-for="(item, index) in list" :key="index">
                   <th><router-link :to="`/order/${item.id}`">
                      <span style="color: black;">{{ item.id }}</span> 
                     </router-link></th>
@@ -145,5 +145,7 @@ export default {
 </script>
 
 <style scoped>
-
+.des-order{
+  color: black;
+}
 </style>

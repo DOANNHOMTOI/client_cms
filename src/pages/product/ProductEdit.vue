@@ -5,7 +5,11 @@
       <div class="col-12">
         <div class="page-title-box">
           <div class="page-title-right">
-            <router-link to="/product/list" class="btn btn-primary waves-effect waves-light">Back</router-link>
+            <router-link
+              to="/product/list"
+              class="btn btn-primary waves-effect waves-light"
+              >Back</router-link
+            >
           </div>
           <h4 class="page-title">Edit Product</h4>
         </div>
@@ -18,44 +22,50 @@
         <form class="row col-12">
           <div v-if="errors.length">
             <div class="alert alert-danger">
-              <p v-for="error in errors">- {{ error }}</p> <br>
+              <p v-for="(error, i) in errors" :key="i">- {{ error }}</p>
+              <br />
             </div>
           </div>
 
           <div class="form-group mb-3 col-6 ">
             <label>SKU</label>
-            <input v-model="sku" type="text" class="form-control">
+            <input v-model="sku" type="text" class="form-control" />
           </div>
           <div class="form-group mb-3 col-6">
             <label>Name</label>
-            <input v-model="name" type="text" class="form-control">
+            <input v-model="name" type="text" class="form-control" />
           </div>
           <div class="form-group mb-3 col-6">
             <label>Category</label>
             <select v-model="category_id" class="form-control">
-              <option v-for="(cate,index) in listProductCategory" :value="cate.id">{{ cate.name }}</option>
+              <option
+                v-for="(cate, index) in listProductCategory"
+                :key="index"
+                :value="cate.id"
+                >{{ cate.name }}</option
+              >
             </select>
           </div>
           <div class="form-group mb-3 col-6">
             <label>Quantity</label>
-            <input v-model="qty" type="number" class="form-control">
+            <input v-model="qty" type="number" class="form-control" />
           </div>
 
           <div class="form-group mb-3 col-6">
             <label>Price</label>
-            <input v-model="price" type="number" class="form-control">
+            <input v-model="price" type="number" class="form-control" />
           </div>
           <div class="form-group mb-3 col-6">
             <label>Sale Price</label>
-            <input v-model="price_sale" type="number" class="form-control">
+            <input v-model="price_sale" type="number" class="form-control" />
           </div>
           <div class="form-group mb-3 col-6">
             <label>Excerpt</label>
-            <input v-model="excerpt" type="text" class="form-control">
+            <input v-model="excerpt" type="text" class="form-control" />
           </div>
           <div class="form-group mb-3 col-6">
             <label>Description</label>
-            <input v-model="description" type="text" class="form-control">
+            <input v-model="description" type="text" class="form-control" />
           </div>
           <div class="form-group mb-3 col-12">
             <label>Avatar</label>
@@ -63,27 +73,54 @@
               class="form-control"
               id="file"
               type="file"
-              @change="onFileChange( $event)"
-            >
+              @change="onFileChange($event)"
+            />
           </div>
           <div class="form-group mb-3 col-12">
-            <img style="width:200px" :src="getAvatar()" alt="">
+            <img style="width:200px" :src="getAvatar()" alt="" />
           </div>
           <div class="form-group mb-3">
-            <label>Colors
-              <button type="button" class="btn btn-primary ml-2" @click="addColor"><i class="mdi mdi-plus pr-1"></i> ADD</button>
+            <label
+              >Colors
+              <button
+                type="button"
+                class="btn btn-primary ml-2"
+                @click="addColor"
+              >
+                <i class="mdi mdi-plus pr-1"></i> ADD
+              </button>
             </label>
             <div class="row col-12">
-              <input v-for="(color,i) in colors" v-model="color.value" :key="i" type="text" class="form-control col-2 p-2" placeholder="Color">
+              <input
+                v-for="(color, i) in colors"
+                v-model="color.value"
+                :key="i"
+                type="text"
+                class="form-control col-2 p-2"
+                placeholder="Color"
+              />
             </div>
           </div>
           <div class="form-group mb-3">
-            <label>Sizes
-              <button type="button" class="btn btn-primary ml-2" @click="addSize"><i class="mdi mdi-plus pr-1"></i> ADD</button>
+            <label
+              >Sizes
+              <button
+                type="button"
+                class="btn btn-primary ml-2"
+                @click="addSize"
+              >
+                <i class="mdi mdi-plus pr-1"></i> ADD
+              </button>
             </label>
             <div class="row col-12">
-              <input v-for="(size,i) in sizes" v-model="size.value" :key="i" type="number"
-                     class="form-control col-2 p-2" placeholder="Size">
+              <input
+                v-for="(size, i) in sizes"
+                v-model="size.value"
+                :key="i"
+                type="number"
+                class="form-control col-2 p-2"
+                placeholder="Size"
+              />
             </div>
           </div>
           <div class="form-group mb-3">
@@ -93,25 +130,40 @@
                 <input
                   class="form-control"
                   type="file"
-                  @change="onFileChange1( $event)"
-                >
-                <img v-if="gallery[0] !== undefined" style="width:200px" :src="getPathFile(gallery[0])" alt="">
+                  @change="onFileChange1($event)"
+                />
+                <img
+                  v-if="gallery[0] !== undefined"
+                  style="width:200px"
+                  :src="getPathFile(gallery[0])"
+                  alt=""
+                />
               </div>
               <div class="form-group mb-3 col-4">
                 <input
                   class="form-control"
                   type="file"
-                  @change="onFileChange2( $event)"
-                >
-                <img v-if="gallery[1] !== undefined" style="width:200px" :src="getPathFile(gallery[1])" alt="">
+                  @change="onFileChange2($event)"
+                />
+                <img
+                  v-if="gallery[1] !== undefined"
+                  style="width:200px"
+                  :src="getPathFile(gallery[1])"
+                  alt=""
+                />
               </div>
               <div class="form-group mb-3 col-4">
                 <input
                   class="form-control"
                   type="file"
-                  @change="onFileChange3( $event)"
-                >
-                <img v-if="gallery[2] !== undefined" style="width:200px" :src="getPathFile(gallery[2])" alt="">
+                  @change="onFileChange3($event)"
+                />
+                <img
+                  v-if="gallery[2] !== undefined"
+                  style="width:200px"
+                  :src="getPathFile(gallery[2])"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -119,19 +171,24 @@
             <label>Content</label>
             <ckeditor v-model="body" :config="editorConfig"></ckeditor>
           </div>
-          <button type="button" @click="updateProduct()" class="btn btn-primary waves-effect waves-light">Submit
+          <button
+            type="button"
+            @click="updateProduct()"
+            class="btn btn-primary waves-effect waves-light"
+          >
+            Submit
           </button>
         </form>
-      </div> <!-- end col -->
+      </div>
+      <!-- end col -->
     </div>
-
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import Selectize from 'vue2-selectize'
-import {config} from "../../constants/config";
+import { mapActions } from "vuex";
+import Selectize from "vue2-selectize";
+import { config } from "../../constants/config";
 
 export default {
   name: "ProductAdd",
@@ -157,80 +214,84 @@ export default {
       gallery: [],
       is_active: 1,
       listProductCategory: [],
-      file: '',
-      file1: '',
-      file2: '',
-      file3: '',
+      file: "",
+      file1: "",
+      file2: "",
+      file3: "",
       editorConfig: {
         // The configuration of the editor.
       }
-    }
+    };
   },
   created() {
     this.getProductDetail(this.$route.params.id).then(r => {
-      console.log('getProductDetail', r)
-      this.name = r.data.data.infor.name
-      this.sku = r.data.data.infor.sku
-      this.price = r.data.data.infor.price
-      this.price_sale = r.data.data.infor.price_sale
-      this.excerpt = r.data.data.infor.excerpt
-      this.description = r.data.data.infor.description
-      this.qty = r.data.data.infor.qty
-      this.category_id = r.data.data.infor.category_id
-      this.body = r.data.data.infor.body
-      this.image = r.data.data.infor.image
+      this.name = r.data.data.infor.name;
+      this.sku = r.data.data.infor.sku;
+      this.price = r.data.data.infor.price;
+      this.price_sale = r.data.data.infor.price_sale;
+      this.excerpt = r.data.data.infor.excerpt;
+      this.description = r.data.data.infor.description;
+      this.qty = r.data.data.infor.qty;
+      this.category_id = r.data.data.infor.category_id;
+      this.body = r.data.data.infor.body;
+      this.image = r.data.data.infor.image;
 
       for (let i = 0; i < r.data.data.colors.length; i++) {
-        this.colors.push({value: r.data.data.colors[i].color})
+        this.colors.push({ value: r.data.data.colors[i].color });
       }
 
       for (let i = 0; i < r.data.data.sizes.length; i++) {
-        this.sizes.push({value: r.data.data.sizes[i].size})
+        this.sizes.push({ value: r.data.data.sizes[i].size });
       }
 
       for (let i = 0; i < r.data.data.images.length; i++) {
-        this.gallery.push(r.data.data.images[i].image)
+        this.gallery.push(r.data.data.images[i].image);
       }
-      console.log(this.gallery)
-
-    })
-    this.getListProductCategory(-1).then(r => {
-      this.listProductCategory = r.data.data.data
-    }).catch(e => {
-      console.log(e)
-    })
+      console.log(this.gallery);
+    });
+    this.getListProductCategory(-1)
+      .then(r => {
+        this.listProductCategory = r.data.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
   },
   methods: {
-    ...mapActions(['updateProductAPI', 'getListProductCategory','getProductDetail']),
+    ...mapActions([
+      "updateProductAPI",
+      "getListProductCategory",
+      "getProductDetail"
+    ]),
     onFileChange(event) {
-      this.file = event.target.files[0]
+      this.file = event.target.files[0];
     },
     onFileChange1(event) {
-      this.file1 = event.target.files[0]
+      this.file1 = event.target.files[0];
     },
     onFileChange2(event) {
-      this.file2 = event.target.files[0]
+      this.file2 = event.target.files[0];
     },
     onFileChange3(event) {
-      this.file3 = event.target.files[0]
+      this.file3 = event.target.files[0];
     },
     updateProduct() {
-      this.errors = []
+      this.errors = [];
       if (!this.checkForm()) return false;
 
-      let arrSize = []
+      let arrSize = [];
       this.sizes.map(item => {
-        if (item.value !== ''){
-          arrSize.push(item.value)
+        if (item.value !== "") {
+          arrSize.push(item.value);
         }
-      })
+      });
 
-      let arrColor = []
+      let arrColor = [];
       this.colors.map(item => {
-        if (item.value !== ''){
-          arrColor.push(item.value)
+        if (item.value !== "") {
+          arrColor.push(item.value);
         }
-      })
+      });
       let obj = {
         id: this.$route.params.id,
         name: this.name,
@@ -240,33 +301,34 @@ export default {
         description: this.description,
         body: this.body,
         category_id: this.category_id,
-        colors: arrColor.join(','),
-        sizes: arrSize.join(','),
+        colors: arrColor.join(","),
+        sizes: arrSize.join(","),
         is_active: 1,
         price: parseInt(this.price),
         price_sale: parseInt(this.price_sale),
         image_id: this.file,
         image_1: this.file1,
         image_2: this.file2,
-        image_3: this.file3,
-      }
-      this.updateProductAPI(obj).then(r => {
-      }).catch(e => {
-        console.log('e', e)
-      })
+        image_3: this.file3
+      };
+      this.updateProductAPI(obj)
+        .then(r => {})
+        .catch(e => {
+          console.log("e", e);
+        });
     },
-    checkForm(){
+    checkForm() {
       let flag = true;
       if (!this.name) {
-        this.errors.push('name is required !');
+        this.errors.push("name is required !");
         flag = false;
       }
       if (!this.sku) {
-        this.errors.push('sku is required !');
+        this.errors.push("sku is required !");
         flag = false;
       }
       if (!this.price) {
-        this.errors.push('price is required !');
+        this.errors.push("price is required !");
         flag = false;
       }
       // if (!this.file) {
@@ -274,35 +336,33 @@ export default {
       //   flag = false;
       // }
       if (this.sizes.length === 0) {
-        this.errors.push('sizes is required !');
+        this.errors.push("sizes is required !");
         flag = false;
       }
       if (this.colors.length === 0) {
-        this.errors.push('colors is required !');
+        this.errors.push("colors is required !");
         flag = false;
       }
       if (!this.category_id) {
-        this.errors.push('category is required !');
+        this.errors.push("category is required !");
         flag = false;
       }
       return flag;
     },
     addSize() {
-      this.sizes.push({value: ''});
+      this.sizes.push({ value: "" });
     },
     addColor() {
-      this.colors.push({value: ''});
+      this.colors.push({ value: "" });
     },
-    getAvatar(){
-      return this.getPathFile(this.image)
+    getAvatar() {
+      return this.getPathFile(this.image);
     },
-    getPathFile(path){
-      return config.url_api_back_end_real + path
+    getPathFile(path) {
+      return config.url_api_back_end_real + path;
     }
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

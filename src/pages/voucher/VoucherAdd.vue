@@ -18,7 +18,7 @@
         <form>
           <div v-if="errors.length">
             <div class="alert alert-danger">
-              <p v-for="error in errors">- {{ error }}</p> <br>
+              <p v-for="error in errors" :key="error">- {{ error }}</p> <br>
             </div>
           </div>
           <div class="form-group mb-3">
