@@ -6,10 +6,10 @@
       <!-- User box -->
       <div class="user-box text-center">
         <img src="static/assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme"
-             class="rounded-circle avatar-md">
+          class="rounded-circle avatar-md">
         <div class="dropdown">
           <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-             data-toggle="dropdown">Geneva Kennedy</a>
+            data-toggle="dropdown">Geneva Kennedy</a>
           <div class="dropdown-menu user-pro-dropdown">
 
             <!-- item-->
@@ -57,10 +57,11 @@
           <li class="menu-title mt-2">Apps</li>
 
 
-          <li v-if="getPermissionUser.includes('viewCategory') || getPermissionUser.includes('createCategory') || getPermissionUser.includes('editCategory')">
+          <li
+            v-if="getPermissionUser.includes('viewCategory') || getPermissionUser.includes('createCategory') || getPermissionUser.includes('editCategory')">
             <a href="#sidebarEcommerce" data-toggle="collapse">
               <i class="mdi mdi-text-box-multiple-outline"></i>
-              <span>  Category </span>
+              <span> Category </span>
               <span class="menu-arrow"></span>
             </a>
             <div class="collapse" id="sidebarEcommerce">
@@ -74,7 +75,8 @@
               </ul>
             </div>
           </li>
-          <li v-if="getPermissionUser.includes('viewProduct') || getPermissionUser.includes('createProduct') || getPermissionUser.includes('editProduct')">
+          <li
+            v-if="getPermissionUser.includes('viewProduct') || getPermissionUser.includes('createProduct') || getPermissionUser.includes('editProduct')">
             <a href="#sidebarProduct" data-toggle="collapse">
               <i class="mdi mdi-layers-outline"></i>
               <span> Product </span>
@@ -91,7 +93,8 @@
               </ul>
             </div>
           </li>
-          <li v-if="getPermissionUser.includes('viewVoucher') || getPermissionUser.includes('createVoucher') || getPermissionUser.includes('editVoucher')">
+          <li
+            v-if="getPermissionUser.includes('viewVoucher') || getPermissionUser.includes('createVoucher') || getPermissionUser.includes('editVoucher')">
             <a href="#sidebarVoucher" data-toggle="collapse">
               <i class="mdi mdi-gift-outline"></i>
               <span>Voucher </span>
@@ -136,7 +139,7 @@
               </ul>
             </div>
           </li>
-          <li  v-if="getPermissionUser.includes('viewGuest')">
+          <li v-if="getPermissionUser.includes('viewGuest')">
             <a href="#sidebarGuest" data-toggle="collapse">
               <i class="mdi mdi-account-circle-outline"></i>
               <span>Guest </span>
@@ -181,37 +184,6 @@
               </ul>
             </div>
           </li>
-          <li v-if="JSON.parse(getMe).id == 1">
-            <a href="#sidebarPermission" data-toggle="collapse">
-              <i class="mdi mdi-share-variant"></i>
-              <span>Permission </span>
-              <span class="menu-arrow"></span>
-            </a>
-            <div class="collapse" id="sidebarPermission">
-              <ul class="nav-second-level">
-                <li>
-                  <router-link to="/permission">List</router-link>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li v-if="JSON.parse(getMe).id == 1">
-            <a href="#sidebarUser" data-toggle="collapse">
-              <i class="mdi mdi-book-account-outline"></i>
-              <span>Partner </span>
-              <span class="menu-arrow"></span>
-            </a>
-            <div class="collapse" id="sidebarUser">
-              <ul class="nav-second-level">
-                <li>
-                  <router-link to="/user">List</router-link>
-                </li>
-                <li>
-                  <router-link to="/user/add">Add</router-link>
-                </li>
-              </ul>
-            </div>
-          </li>
         </ul>
 
       </div>
@@ -226,19 +198,19 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import {mapGetters} from 'vuex'
+import { mapActions } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   name: "AsideCp",
-  computed:{
-    ...mapGetters(['getPermissionUser','getMe']),
-    nameRoute : function (){
+  computed: {
+    ...mapGetters(['getPermissionUser', 'getMe']),
+    nameRoute: function () {
       return this.$route.name;
     },
-    getImageLogo: function (){
+    getImageLogo: function () {
       return '/static/images/logo.png'
     },
-    getImageAvatar: function (){
+    getImageAvatar: function () {
       return '/static/images/avt.png'
     }
   },
