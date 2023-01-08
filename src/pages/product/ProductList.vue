@@ -4,15 +4,8 @@
     <div class="row">
       <div class="col-12">
         <div class="page-title-box">
-          <div
-            v-if="getPermissionUser.includes('createProduct')"
-            class="page-title-right"
-          >
-            <router-link
-              to="/product/add"
-              class="btn btn-blue waves-effect waves-light"
-              >Create</router-link
-            >
+          <div v-if="getPermissionUser.includes('createProduct')" class="page-title-right">
+            <router-link to="/product/add" class="btn btn-blue waves-effect waves-light">Create</router-link>
           </div>
           <h4 class="page-title">Product</h4>
         </div>
@@ -21,29 +14,13 @@
     <!-- end page title -->
     <div class="row">
       <div data-v-482562f6="" class="form-group mb-3 col-2 ">
-        <input
-          v-model="sku"
-          data-v-482562f6=""
-          type="text"
-          placeholder="Mã sản phẩm"
-          class="form-control"
-        />
+        <input v-model="sku" data-v-482562f6="" type="text" placeholder="Mã sản phẩm" class="form-control" />
       </div>
       <div data-v-482562f6="" class="form-group mb-3 col-3">
-        <input
-          v-model="name"
-          style=""
-          data-v-482562f6=""
-          type="text"
-          placeholder="Tên sản phẩm"
-          class="form-control"
-        />
+        <input v-model="name" style="" data-v-482562f6="" type="text" placeholder="Tên sản phẩm" class="form-control" />
       </div>
       <div data-v-482562f6="" class="form-group mb-3 col-2">
-        <button
-          @click="searchProduct()"
-          class="btn btn-blue waves-effect waves-light"
-        >
+        <button @click="searchProduct()" class="btn btn-blue waves-effect waves-light">
           Search
         </button>
       </div>
@@ -65,7 +42,7 @@
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody v-if="list">
                 <tr v-for="(item, index) in list" :key="index">
                   <th scope="row">{{ index + 1 }}</th>
                   <td>{{ item.sku }}</td>
@@ -90,17 +67,11 @@
                   </td>
                   <td>{{ convertMoment(item.created_at) }}</td>
                   <td>
-                    <button
-                      @click="Delete(item.id)"
-                      class="btn btn-danger waves-effect waves-light"
-                    >
+                    <button @click="Delete(item.id)" class="btn btn-danger waves-effect waves-light">
                       Delete
                     </button>
-                    <router-link
-                      v-if="getPermissionUser.includes('editProduct')"
-                      :to="'/product/' + item.id"
-                      class="btn btn-warning waves-effect waves-light"
-                    >
+                    <router-link v-if="getPermissionUser.includes('editProduct')" :to="'/product/' + item.id"
+                      class="btn btn-warning waves-effect waves-light">
                       Edit
                     </router-link>
                   </td>
@@ -113,25 +84,12 @@
       </div>
       <!-- end col -->
       <div class="col-12 m-auto text-center d-flex justify-content-center">
-        <div
-          class="dataTables_paginate paging_simple_numbers"
-          id="datatable-buttons_paginate"
-        >
+        <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
           <ul class="pagination pagination-rounded">
-            <li
-              v-for="(page, i) in totalPage"
-              :key="i"
-              class="paginate_button page-item"
-              :class="{ active: currPage === i + 1 }"
-            >
-              <a
-                @click="changePage(page)"
-                href="#"
-                aria-controls="datatable-buttons"
-                data-dt-idx="1"
-                tabindex="0"
-                class="page-link"
-              >
+            <li v-for="(page, i) in totalPage" :key="i" class="paginate_button page-item"
+              :class="{ active: currPage === i + 1 }">
+              <a @click="changePage(page)" href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0"
+                class="page-link">
                 {{ i + 1 }}
               </a>
             </li>
@@ -145,7 +103,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import moment from "moment";
-import {axiosInstance} from "../../helpers/axiosInstance";
+import { axiosInstance } from "../../helpers/axiosInstance";
 
 export default {
   name: "ProductList",
@@ -209,11 +167,27 @@ export default {
       try {
         await axiosInstance
           .delete(`/api/product/` + id, {})
-          .then(res => alert("xóa thành công"));
-      } catch (error) {}
+          .then(res =>
+            console.log("res", res),
+            alert("xoá thành công")
+          )
+
+        this.getListProduct({ currPage: this.currPage })
+          .then(r => {
+            this.list = r.data.data.data;
+            this.currPage = r.data.data.current_page;
+            this.totalPage = r.data.data.last_page;
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+      catch (error) { }
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

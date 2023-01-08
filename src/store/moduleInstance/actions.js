@@ -1,10 +1,8 @@
-import {isEmptyObject} from "../../helpers";
-import {axiosVultrService} from "../../helpers/axiosInstance";
-import store from "../index";
 import axios from 'axios';
+import { axiosVultrService } from "../../helpers/axiosInstance";
 var querystring = require('querystring');
 
-import {config} from "../../constants/config";
+import { config } from "../../constants/config";
 export default {
   async getListRegion({commit, state}, data) {
     try {

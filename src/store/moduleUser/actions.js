@@ -1,6 +1,5 @@
-import {isEmptyObject} from "../../helpers";
-import {axiosInstance} from "../../helpers/axiosInstance";
-import store from "../index";
+import { isEmptyObject } from "../../helpers";
+import { axiosInstance } from "../../helpers/axiosInstance";
 import router from "../../router";
 async function uploadFile(data) {
   let image_id = null
