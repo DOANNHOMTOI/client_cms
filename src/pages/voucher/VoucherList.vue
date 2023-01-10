@@ -131,23 +131,20 @@ export default {
       return moment(date).format("YYYY-MM-DD HH:mm:ss");
     },
     async deleteVoucher(id) {
+      this.$store.commit("SHOW_LOADING", true)
       return await axiosInstance.delete(`/api/voucher/` + id).then(r => {
-        this.$store.commit("SHOW_LOADING", true)
-        return r
+        this.getListVoucher(this.currPage).then(r => {
+          this.list = r.data.data.data
+          this.currPage = r.data.data.current_page
+          this.totalPage = r.data.data.last_page
+        }).catch(e => {
+          console.log(e)
+        }),
+          this.$store.commit("SHOW_LOADING", false)
       })
         .catch(e => {
           console.log(e)
         })
-        .finally(
-          this.getListVoucher(this.currPage).then(r => {
-            this.list = r.data.data.data
-            this.currPage = r.data.data.current_page
-            this.totalPage = r.data.data.last_page
-          }).catch(e => {
-            console.log(e)
-          }),
-          this.$store.commit("SHOW_LOADING", false)
-        )
     }
   },
 }
